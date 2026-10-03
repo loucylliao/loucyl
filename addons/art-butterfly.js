@@ -52,6 +52,7 @@ function startArtButterfly() {
     let mode = "static";
     let holdTimer = null;
     let pointerActive = false;
+    let pointerStartedInteractive = false;
     let hasMoved = false;
     let pointerStartX = 0;
     let pointerStartY = 0;
@@ -267,10 +268,17 @@ function startArtButterfly() {
     }
 
     sceneEl.addEventListener("pointerdown", (e) => {
+        if (e.pointerType === "touch" && mode === "interactive") e.preventDefault();
         pointerActive = true;
+        pointerStartedInteractive = mode === "interactive";
         hasMoved = false;
         pointerStartX = e.clientX;
         pointerStartY = e.clientY;
+
+        if (pointerStartedInteractive) {
+            activateDrag(e);
+            return;
+        }
 
         holdTimer = setTimeout(() => {
             holdTimer = null;
@@ -305,6 +313,7 @@ function startArtButterfly() {
 
         if (isDragging) {
             endDrag();
+            if (pointerStartedInteractive && !hasMoved) setMode("static");
             return;
         }
 
@@ -312,7 +321,6 @@ function startArtButterfly() {
 
         if (mode === "static")            setMode("playing");
         else if (mode === "playing")      setMode("static");
-        else if (mode === "interactive")  setMode("static");
     });
 
     sceneEl.addEventListener("pointercancel", () => {
@@ -331,4 +339,3 @@ function startArtButterfly() {
 }
 
 startArtButterfly();
-

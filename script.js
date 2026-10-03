@@ -117,6 +117,140 @@ if (artScene && "IntersectionObserver" in window) {
         .filter(Boolean);
     if (!sections.length) return;
 
+    const revealSparkles = (() => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return () => {};
+
+        const config = {
+            count: [3, 5],
+            startDelay: 140,
+            releaseSpan: 320,
+            speed: [0.22, 0.6],
+            life: [1100, 1800],
+            peakAlpha: 0.5,
+            coreSize: [1, 2.4],
+            glow: 6,
+            coreColor: '#f6e6ee'
+        };
+        const accent = getComputedStyle(document.documentElement)
+            .getPropertyValue('--color-accent').trim() || '#d0afc0';
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return () => {};
+
+        canvas.setAttribute('aria-hidden', 'true');
+        Object.assign(canvas.style, {
+            position: 'fixed',
+            inset: '0',
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none',
+            zIndex: '2147483000'
+        });
+        document.body.appendChild(canvas);
+
+        let width = 0;
+        let height = 0;
+        const dots = [];
+        let running = false;
+        const rand = (min, max) => min + Math.random() * (max - min);
+
+        function resize() {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = Math.round(width * dpr);
+            canvas.height = Math.round(height * dpr);
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function frame(now) {
+            ctx.clearRect(0, 0, width, height);
+            for (let i = dots.length - 1; i >= 0; i--) {
+                const dot = dots[i];
+                const age = (now - dot.born) / dot.life;
+                if (age < 0) continue;
+                if (age >= 1) {
+                    dots.splice(i, 1);
+                    continue;
+                }
+
+                dot.x += dot.vx;
+                dot.y += dot.vy;
+                dot.vx *= 0.988;
+                dot.vy *= 0.988;
+
+                const fade = Math.sin(age * Math.PI);
+                const twinkle = 0.45 + 0.55 * Math.abs(
+                    Math.sin((now - dot.born) * dot.frequency + dot.phase)
+                );
+                ctx.save();
+                ctx.globalAlpha = fade * twinkle * config.peakAlpha;
+                ctx.fillStyle = config.coreColor;
+                ctx.shadowColor = accent;
+                ctx.shadowBlur = config.glow;
+                ctx.beginPath();
+                ctx.arc(dot.x, dot.y, dot.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            ctx.globalAlpha = 1;
+            if (!dots.length) {
+                running = false;
+                ctx.clearRect(0, 0, width, height);
+                return;
+            }
+            requestAnimationFrame(frame);
+        }
+
+        function release(item) {
+            const sidebar = item.closest('.sidebar');
+            if (sidebar && getComputedStyle(sidebar).visibility === 'hidden') return;
+
+            const link = item.querySelector(':scope > a');
+            if (!link) return;
+            const range = document.createRange();
+            range.selectNodeContents(link);
+            const rect = range.getBoundingClientRect();
+            const box = rect.width ? rect : link.getBoundingClientRect();
+            if (!box.width || box.bottom < 0 || box.top > height) return;
+
+            const count = Math.round(rand(config.count[0], config.count[1]));
+            const start = performance.now();
+            const direction = rand(0, Math.PI * 2);
+            for (let i = 0; i < count; i++) {
+                const speed = rand(config.speed[0], config.speed[1]);
+                const angle = direction + (i / count) * Math.PI * 2 + rand(-0.5, 0.5);
+                dots.push({
+                    x: box.left + rand(0, box.width),
+                    y: box.bottom + rand(-1, 5),
+                    vx: Math.cos(angle) * speed,
+                    vy: Math.sin(angle) * speed,
+                    size: rand(config.coreSize[0], config.coreSize[1]),
+                    phase: rand(0, Math.PI * 2),
+                    frequency: rand(0.006, 0.014),
+                    born: start + (i / count) * config.releaseSpan + rand(0, 60),
+                    life: rand(config.life[0], config.life[1])
+                });
+            }
+
+            if (!running) {
+                running = true;
+                requestAnimationFrame(frame);
+            }
+        }
+
+        resize();
+        window.addEventListener('resize', resize);
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) return;
+            dots.length = 0;
+            const active = document.querySelector('.sidebar .nav-item.is-active');
+            if (active) release(active);
+        });
+        return (item, delay = config.startDelay) => setTimeout(() => release(item), delay);
+    })();
+
     const COLLAPSE_MS = 280;
     const DEBOUNCE_MS = 180;
 
@@ -134,7 +268,10 @@ if (artScene && "IntersectionObserver" in window) {
 
     function expand(id) {
         const el = document.querySelector(`.sidebar .nav-item[data-section="${id}"]`);
-        if (el) el.classList.add('is-active');
+        if (el) {
+            el.classList.add('is-active');
+            revealSparkles(el);
+        }
         currentId = id;
     }
 
@@ -175,7 +312,10 @@ if (artScene && "IntersectionObserver" in window) {
     sections.forEach((s) => io.observe(s));
 
     const first = document.querySelector('.sidebar .nav-item[data-section="intro"]');
-    if (first) first.classList.add('is-active');
+    if (first) {
+        first.classList.add('is-active');
+        revealSparkles(first, 700);
+    }
     currentId = 'intro';
 })();
 
@@ -385,7 +525,7 @@ if (artScene && "IntersectionObserver" in window) {
 
         panel.addEventListener('animationend', onEnd);
         fsCancel = () => { done = true; panel.removeEventListener('animationend', onEnd); };
-        fsTimer = setTimeout(go, 650);
+        fsTimer = setTimeout(go, 750);
     }
 
     function isFullscreen() {
@@ -429,7 +569,7 @@ if (artScene && "IntersectionObserver" in window) {
         }
     }
 
-    function open(id) {
+    function open(id, fullscreen = false) {
         sheet.classList.remove('is-closing');
         bannerFig?.classList.remove('is-closing');
 
@@ -439,7 +579,7 @@ if (artScene && "IntersectionObserver" in window) {
             '.project-section:not([hidden])'
         )?.hasAttribute('data-sheet-fullscreen');
         if (fsBtn) fsBtn.hidden = !canFullscreen;
-        setFullscreen(false);
+        setFullscreen(fullscreen);
 
         const visibleSection = sheet.querySelector('.project-section:not([hidden])');
         if (crumb && visibleSection) {
@@ -463,9 +603,23 @@ if (artScene && "IntersectionObserver" in window) {
         });
     }
 
-    function close() {
+    function close(dragOffset = null) {
         if (sheet.classList.contains('is-closing')) return;
+        const closingFullscreen = isFullscreen();
+        const draggedClose = Number.isFinite(dragOffset);
+        const closingAnimation = closingFullscreen && !draggedClose
+            ? 'project-sheet-fade-out'
+            : 'project-sheet-out';
         clearFsEntering();
+
+        if (draggedClose) {
+            panel.style.setProperty('--sheet-dismiss-offset', `${Math.max(0, dragOffset)}px`);
+            sheet.classList.add('is-drag-dismissing');
+        }
+
+        if (closingFullscreen) {
+            document.body.classList.remove('sheet-fullscreen');
+        }
 
         bannerFig?.classList.add('is-closing');
         sheet.classList.add('is-closing');
@@ -477,11 +631,16 @@ if (artScene && "IntersectionObserver" in window) {
 
             clearFsEntering();
             sheet.classList.remove('is-closing');
+            sheet.classList.remove('is-drag-dismissing');
             sheet.hidden = true;
             document.body.classList.remove('project-sheet-open');
             document.body.classList.remove('sheet-fullscreen');
+            document.documentElement.classList.remove('sheet-fullscreen');
             sheet.classList.remove('project-sheet--fullscreen');
             bannerFig?.classList.remove('is-closing');
+            panel.style.removeProperty('--sheet-dismiss-offset');
+            panel.style.removeProperty('transform');
+            panel.style.removeProperty('transition');
 
             delete sheet.dataset.active;
 
@@ -493,20 +652,87 @@ if (artScene && "IntersectionObserver" in window) {
         };
 
         panel.addEventListener('animationend', function handler(e) {
-            if (e.animationName !== 'project-sheet-out') return;
+            if (e.target !== panel || e.animationName !== closingAnimation) return;
             panel.removeEventListener('animationend', handler);
             finish();
         });
 
-        setTimeout(finish, 520);
+        setTimeout(finish, closingFullscreen && !draggedClose ? 450 : 700);
+    }
+
+    const dragHandle = sheet.querySelector('.project-sheet-bar');
+    if (dragHandle && panel) {
+        let drag = null;
+        let dragResetTimer = null;
+
+        const resetDragStyle = () => {
+            clearTimeout(dragResetTimer);
+            dragResetTimer = null;
+            panel.style.removeProperty('transform');
+            panel.style.removeProperty('transition');
+        };
+
+        dragHandle.addEventListener('pointerdown', (e) => {
+            if (!window.matchMedia('(max-width: 700px)').matches
+                || e.pointerType !== 'touch'
+                || sheet.hidden
+                || sheet.classList.contains('is-closing')
+                || e.target.closest('button')) return;
+
+            resetDragStyle();
+            drag = { pointerId: e.pointerId, startX: e.clientX, startY: e.clientY, offset: 0 };
+            dragHandle.setPointerCapture(e.pointerId);
+            panel.style.transition = 'none';
+        });
+
+        dragHandle.addEventListener('pointermove', (e) => {
+            if (!drag || e.pointerId !== drag.pointerId) return;
+            const deltaX = e.clientX - drag.startX;
+            const deltaY = e.clientY - drag.startY;
+            if (Math.abs(deltaX) > Math.abs(deltaY) && drag.offset === 0) return;
+
+            drag.offset = Math.max(0, deltaY);
+            panel.style.transform = `translateY(${drag.offset}px)`;
+        });
+
+        const finishDrag = (e, allowClose) => {
+            if (!drag || e.pointerId !== drag.pointerId) return;
+            const offset = drag.offset;
+            drag = null;
+
+            if (allowClose && offset >= 100) {
+                resetDragStyle();
+                close(offset);
+                return;
+            }
+
+            panel.style.transition = 'transform 220ms cubic-bezier(0.22, 1, 0.36, 1)';
+            panel.style.transform = 'translateY(0)';
+            const onTransitionEnd = (event) => {
+                if (event.target !== panel || event.propertyName !== 'transform') return;
+                panel.removeEventListener('transitionend', onTransitionEnd);
+                resetDragStyle();
+            };
+            panel.addEventListener('transitionend', onTransitionEnd);
+            dragResetTimer = setTimeout(() => {
+                panel.removeEventListener('transitionend', onTransitionEnd);
+                resetDragStyle();
+            }, 300);
+        };
+
+        dragHandle.addEventListener('pointerup', (e) => finishDrag(e, true));
+        dragHandle.addEventListener('pointercancel', (e) => finishDrag(e, false));
     }
 
     document.querySelectorAll('[data-project]').forEach((el) => {
-        el.addEventListener('click', () => open(el.dataset.project));
+        el.addEventListener('click', () => {
+            open(el.dataset.project, el.hasAttribute('data-project-fullscreen'));
+        });
         el.addEventListener('keydown', (e) => {
+            if (el.matches('a, button')) return;
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                open(el.dataset.project);
+                open(el.dataset.project, el.hasAttribute('data-project-fullscreen'));
             }
         });
     });
@@ -683,7 +909,9 @@ if (artScene && "IntersectionObserver" in window) {
         btn.setAttribute('aria-expanded', String(open));
         btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
         if (typeof lenis !== 'undefined' && lenis) {
-            open ? lenis.stop() : lenis.start();
+            open || document.body.classList.contains('project-sheet-open')
+                ? lenis.stop()
+                : lenis.start();
         }
     }
 
@@ -699,6 +927,11 @@ if (artScene && "IntersectionObserver" in window) {
 
     sidebar.querySelectorAll('.nav-list a[href^="#"]').forEach((a) => {
         a.addEventListener('click', (e) => {
+            if (a.hasAttribute('data-project')) {
+                e.preventDefault();
+                setOpen(false);
+                return;
+            }
             const id = a.getAttribute('href').slice(1);
             const target = document.getElementById(id === 'home' ? 'intro' : id);
             if (!target) return;

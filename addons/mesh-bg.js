@@ -46,6 +46,8 @@
     let nodes = [];
     let stars = [];
     let t = 0;
+    let shootingStar = null;
+    let nextShootingStar = 360;
     const mouse = { x: -9999, y: -9999, active: false };
 
     function rand(a, b) { return a + Math.random() * (b - a); }
@@ -69,6 +71,19 @@
             r: rand(CONFIG.starRadius[0], CONFIG.starRadius[1]),
             phase: Math.random() * Math.PI * 2,
             speed: rand(0.6, 1.4)
+        };
+    }
+
+    function makeShootingStar() {
+        const direction = Math.random() < 0.5 ? 1 : -1;
+        const angle = direction === 1 ? Math.PI * 0.18 : Math.PI * 0.82;
+        return {
+            x: direction === 1 ? rand(0, w * 0.7) : rand(w * 0.3, w),
+            y: rand(0, h * 0.58),
+            vx: Math.cos(angle) * 4.2,
+            vy: Math.sin(angle) * 4.2,
+            age: 0,
+            duration: rand(42, 58)
         };
     }
 
@@ -99,6 +114,18 @@
 
     function step() {
         t += 1;
+
+        if (!reduceMotion) {
+            if (shootingStar) {
+                shootingStar.x += shootingStar.vx;
+                shootingStar.y += shootingStar.vy;
+                shootingStar.age += 1;
+                if (shootingStar.age >= shootingStar.duration) shootingStar = null;
+            } else if (t >= nextShootingStar) {
+                shootingStar = makeShootingStar();
+                nextShootingStar = t + rand(720, 1200);
+            }
+        }
 
         for (const n of nodes) {
             n.x += n.vx;
@@ -132,10 +159,31 @@
         }
     }
 
+    function drawShootingStar() {
+        if (!shootingStar) return;
+
+        const progress = shootingStar.age / shootingStar.duration;
+        const opacity = Math.sin(progress * Math.PI) * 0.48;
+        const tailLength = 64;
+        const tailX = shootingStar.x - shootingStar.vx * tailLength / 4.2;
+        const tailY = shootingStar.y - shootingStar.vy * tailLength / 4.2;
+        const gradient = ctx.createLinearGradient(tailX, tailY, shootingStar.x, shootingStar.y);
+        gradient.addColorStop(0, `rgba(${CONFIG.starRGB},0)`);
+        gradient.addColorStop(1, `rgba(${CONFIG.starRGB},${opacity.toFixed(3)})`);
+
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 1.25;
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(shootingStar.x, shootingStar.y);
+        ctx.stroke();
+    }
+
     function draw() {
         ctx.clearRect(0, 0, w, h);
 
         drawStars();
+        drawShootingStar();
 
         const L = CONFIG.linkDist;
         const L2 = L * L;

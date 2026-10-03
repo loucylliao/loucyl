@@ -11,9 +11,9 @@
         moveIdle: 180,
         dotCounts: [2, 2, 2, 2, 3],
         halo: false,
-        haloSize: 80,
-        haloAlpha: 0.13,
-        haloFollow: 0.16,
+        haloSize: 12,
+        haloAlpha: 0.34,
+        haloFollow: 0.28,
         dotSize: [1, 2.4],
         dotGlow: 9,
         dotAlpha: 0.9,
@@ -135,8 +135,10 @@
         if (ha < 0.01) return;
 
         const g = ctx.createRadialGradient(hx, hy, 0, hx, hy, CFG.haloSize);
-        g.addColorStop(0, `rgba(${hr},${hg},${hb},${CFG.haloAlpha * ha})`);
-        g.addColorStop(0.5, `rgba(${hr},${hg},${hb},${CFG.haloAlpha * ha * 0.35})`);
+        g.addColorStop(0, `rgba(${hr},${hg},${hb},0)`);
+        g.addColorStop(0.62, `rgba(${hr},${hg},${hb},0)`);
+        g.addColorStop(0.8, `rgba(${hr},${hg},${hb},${CFG.haloAlpha * ha})`);
+        g.addColorStop(0.92, `rgba(${hr},${hg},${hb},${CFG.haloAlpha * ha * 0.55})`);
         g.addColorStop(1, `rgba(${hr},${hg},${hb},0)`);
         ctx.fillStyle = g;
         ctx.fillRect(hx - CFG.haloSize, hy - CFG.haloSize, CFG.haloSize * 2, CFG.haloSize * 2);
@@ -286,6 +288,12 @@
         },
         { passive: true }
     );
+
+    document.addEventListener("pointerdown", (e) => {
+        if (e.pointerType === "touch") return;
+        spawn(e.clientX, e.clientY);
+        start();
+    });
 
     document.addEventListener("mouseleave", () => {
         lastX = lastY = null;

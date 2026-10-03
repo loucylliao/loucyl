@@ -85,6 +85,21 @@
             ctx.stroke();
         }
 
+        function drawProgress() {
+            ctx.clearRect(0, 0, w, h);
+            drawAxes();
+            if (t <= 0) return;
+
+            ctx.beginPath();
+            let [x, y] = toScreen(point(0));
+            ctx.moveTo(x, y);
+            for (let s = STEP; s <= t; s += STEP) {
+                [x, y] = toScreen(point(s));
+                ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+        }
+
         function draw() {
             ctx.beginPath();
             let [x, y] = toScreen(point(t));
@@ -124,16 +139,19 @@
         if (resize()) drawAxes();
 
         new IntersectionObserver(entries => {
-            visible = entries[0].isIntersecting;
+            const nextVisible = entries[0].isIntersecting;
+            if (nextVisible === visible) return;
+
+            visible = nextVisible;
             if (visible) play();
             else stop();
-        }, { threshold: 0.4 }).observe(canvas);
+        }, { threshold: 0 }).observe(canvas);
 
         canvas.addEventListener("click", play);
 
         window.addEventListener("resize", () => {
-            if (visible) play();
-            else if (resize()) drawAxes();
+            if (!resize()) return;
+            drawProgress();
         });
     }
 
