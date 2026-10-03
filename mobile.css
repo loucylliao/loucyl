@@ -463,9 +463,10 @@
     .her-button { position: absolute; top: 67%; left: 78%; z-index: 10; }
     .bio { font-size: 1.33rem; }
     .about .section-title { margin-bottom: 3.5rem; margin-top: 1rem; }
-    .about-logo { display: block; top: 23%; left: 29%; }
-    .about-right { margin-top: -23rem; margin-left: 3rem; }
-    .tree { font-size: 0.55rem; margin-left: 11rem; margin-top: 2rem; }
+    .about-right { position: relative; margin-top: -23rem; margin-left: 3rem; }
+
+    .about-logo { position: absolute; display: block; top: -8%; left: 40%; }
+    .tree { width: 46%; box-sizing: border-box; font-size: 0.55rem; left: 54%; margin-top: 7rem; }
     .tree, .tree ul { padding-left: 0rem; }
 
     /* ---- projects ---- */
@@ -477,27 +478,35 @@
     .projects-logo .logo-text { right: 7.3rem; width: 60%; top: 2.2rem; }
     .projects-logo img { margin: 0; }
 
+    /* project list: thumbnail left, text right, tags underneath */
     .project-list {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.25rem;
-        margin-top: 2.7rem;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+        margin-top: 2.5rem;
     }
     .project-row {
-        grid-template-columns: 1fr;
-        row-gap: 0.65rem;
-        padding: 0;
-        border: 0;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        grid-template-areas:
+            "thumb head"
+            "thumb kind"
+            "thumb desc"
+            "tags  tags";
+        column-gap: 0.75rem;
+        row-gap: 0.25rem;
+        padding: 1rem 0;
+        border-bottom: 1px solid var(--guide);
         align-items: start;
     }
-    .project-row:first-child { border-top: 0; }
-    .project-thumb { width: 100%; max-width: none; }
-    .project-name    { font-size: 1rem; }
-    .project-kind,
-    .project-desc    { font-size: 0.66rem; line-height: 1.45; }
-    .project-tags    { font-size: 0.6rem; }
-    .project-year-end{ font-size: 0.6rem; }
-    .project-body    { gap: 0.35rem; }
+    .project-row:first-child { border-top: 1px solid var(--guide); }
+    .project-thumb { grid-area: thumb; width: 100%; max-width: none; }
+    .project-body { display: contents; }
+    .project-head { grid-area: head; min-width: 0; }
+    .project-name { font-size: clamp(0.9rem, 4vw, 1.1rem); }
+    .project-year-end { font-size: 0.6rem; }
+    .project-kind { grid-area: kind; font-size: 0.66rem; line-height: 1.35; }
+    .project-desc { grid-area: desc; font-size: 0.71rem; line-height: 1.4; }
+    .project-tags { grid-area: tags; font-size: 0.6rem; margin-top: 0.35rem; }
 
     #terminal-demo,
     .terminal-demo {
@@ -551,7 +560,8 @@
         height: 160px;
         padding: 0.75rem 0.8rem;
         font-size: 0.66rem;
-        width: 190px;
+        width: min(190px, 100%);
+        box-sizing: border-box;
     }
     .terminal-out { font-size: 0.66rem; }
     .terminal-in  { font-size: 0.66rem; }
@@ -608,9 +618,9 @@
         left: calc(-1 * (var(--painting-w) + var(--gap-x)));
     }
     .shelf-row > .book-group:nth-child(2) {
-       overflow: visible;
-       min-width: 0;
-   }
+        overflow: visible;
+        min-width: 0;
+    }
 
     .shelf-board { display: none; }
     .book.is-front { box-shadow: none; }
