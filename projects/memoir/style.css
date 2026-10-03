@@ -1,0 +1,928 @@
+/* THE TEXT COLOUR: every piece of text on the site uses this one colour. Change it here. */
+:root {
+    --text: #6b5455;
+    --ink: currentColor;
+    --ink-2: #fde7ea;
+    --ink-3: #d7cacb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scrollbar-gutter: stable;
+    background: #e4e0d5;
+}
+
+body {
+    background-color: #e4e0d5;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+body.is-scrollable {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* OPENING SCENE LAYER */
+
+.opening-scene {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.opening-scene canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.opening-label {
+    position: absolute;
+    right: 28px;
+    bottom: 24px;
+    margin: 0;
+    color: var(--text);
+    font-family: "Libre Caslon Text", sans-serif;
+    font-size: 12px;
+    font-style: italic;
+    letter-spacing: 0.06em;
+    text-transform: lowercase;
+}
+
+.opening-typing {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    color: var(--text);
+    font-family: "Libre Caslon Text", sans-serif;
+    font-size: 18px;
+    line-height: 1;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+}
+
+/* FONTS */
+
+.title {
+    font-family: "Beth Ellen", sans-serif;
+    color: var(--text);
+    font-size: 10px;
+    align-self: left;
+}
+
+.nav-logo {
+    width: 140px;
+    height: auto;
+}
+
+/* TOP BAR + NAV LINKS */
+
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 28px;
+    background: #e4e0d5;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.9s ease;
+}
+
+.topbar .title {
+    margin: 0;
+    font-size: 25px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.topbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    line-height: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.topbar-nav::-webkit-scrollbar { display: none; }
+
+.topbar-nav .divider {
+    width: 1px;
+    height: 15px;
+    background: rgba(87, 63, 63, 0.25);
+    flex-shrink: 0;
+}
+
+.nav-link {
+    font-family: "Geist Mono", monospace;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.005em;
+    line-height: 1.5;
+    color: var(--text);
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.nav-link:hover {
+    opacity: 0.7;
+}
+
+.nav-link.caps {
+    text-transform: uppercase;
+}
+
+/* MOBILE ONLY: hamburger on the right of the top bar */
+.topbar-mobile-controls {
+    display: none;
+    align-items: center;
+    gap: 12px;
+}
+
+/* MOBILE HAMBURGER + DROPDOWN MENU */
+.menu-trigger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+.menu-trigger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.menu-trigger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-trigger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.menu-trigger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    position: absolute;
+    top: 100%;
+    right: 16px;
+    margin-top: 8px;
+    padding: 18px 20px;
+    background: #e4e0d5ab;
+    box-shadow: 0 12px 30px rgba(87, 63, 63, 0.22);
+    border-radius: 4px;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.mobile-menu.open {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+.mobile-menu-link {
+    font-family: "Geist Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+}
+.mobile-menu-link:hover { opacity: 0.7; }
+.mobile-menu-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(87, 63, 63, 0.25);
+}
+
+/* PAGE CONTENT */
+
+.page {
+    position: relative;
+    z-index: 1;
+    flex: 1 0 auto; /* fills whatever height is left, pushing the footer down */
+}
+
+.hero {
+    --tagline-size: 40px;
+    position: relative;
+    height: 70vh;
+}
+
+/* MOBILE ONLY cover (hidden on desktop, shown in the mobile media query below) */
+.page-one-cover { display: none; }
+
+.page-section {
+    position: relative;
+    height: 100vh;
+}
+
+.backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.backdrop-page {
+    height: 100vh;
+}
+
+.page-one-bg   { background: #e4e0d5; }
+.page-two-bg {
+    background: #4a4d3d url("logo/background.jpg") center / cover no-repeat;
+}
+.page-three-bg { background: #e4e0d5; }
+
+/* TYPING TAGLINE (left side, desktop) */
+
+.tagline {
+    position: absolute;
+    left: 8vw;
+    top: 45%;
+    transform: translateY(calc(-50% + 20px));
+    z-index: 1;
+    width: calc(min(48vw, 720px) - 20px);
+    height: calc(var(--tagline-size) * 1.25 * 4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.9s ease;
+}
+
+.tagline-text {
+    margin: 0;
+    text-align: left;
+    font-family: "Libre Caslon Text", sans-serif;
+    font-style: italic;
+    font-size: 60px;
+    line-height: 1.25;
+    color: var(--text);
+}
+
+.tagline-text::after {
+    content: "";
+    display: inline-block;
+    width: 3px;
+    height: 0.85em;
+    margin-left: 6px;
+    vertical-align: -0.08em;
+    background: currentColor;
+    animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+    50% { opacity: 0; }
+}
+
+/* THE POSTAGE STAMP (desktop only — hidden on mobile, see media query) */
+.stamp-holder {
+    position: absolute;
+    left: calc(9vw - 20px);
+    top: calc(55% - (var(--tagline-size) * 1.25 * 4) / 2 + 20px);
+    transform: translateY(calc(-100% - 16px));
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.9s ease;
+}
+
+.postage-stamp {
+    display: block;
+    width: 140px;
+    height: auto;
+    transform: scale(1);
+    transform-origin: bottom left;
+}
+
+/* WRITE BUTTON + PARAGRAPH */
+.hero-cta {
+    position: absolute;
+    left: 8vw;
+    top: calc(53% + 20px);
+    z-index: 1;
+    width: calc(min(48vw, 720px) - 0px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.9s ease;
+}
+
+.write-button {
+    display: inline-block;
+    margin-top: 35px;
+    margin-bottom: 6px;
+    padding: 10px 22px;
+    background: #d7cacb;
+    border: 1.5px solid var(--text);
+    border-radius: 999px;
+    font-family: "Geist Mono", monospace;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.write-button:hover { opacity: 0.75; }
+
+.hero-paragraph {
+    margin-top: 20px;
+    width: 100%;
+    text-align: left;
+    hyphens: auto;
+    font-family: "Libre Caslon Text", serif;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text);
+}
+
+.opening-scene.is-finished ~ .topbar {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.opening-scene.is-finished ~ .tagline,
+.opening-scene.is-finished ~ .page .tagline,
+.opening-scene.is-finished ~ .page .stamp-holder,
+.opening-scene.is-finished ~ .page .hero-cta {
+    opacity: 1;
+}
+
+/* ---- phones ---- */
+
+@media (max-width: 700px) {
+    .topbar-nav { display: none; }
+    .topbar-mobile-controls { display: flex; }
+    .menu-trigger { display: flex; }
+
+    /* the stamp is hidden on mobile per the reference layout */
+    .stamp-holder { display: none; }
+
+    .hero {
+        --tagline-size: 28px;
+        height: auto;
+        min-height: 100vh;
+        padding: 130px 28px 50px;
+    }
+
+    /* the cover: lives inside .opening-scene (above the postcard + bottom label, below "dear,").
+       script.js sets --page-one-height to page one's height and slides the cover up as you scroll,
+       so it only covers page one and the postcard is revealed at page two */
+    .page-one-cover {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--page-one-height, 100vh);
+        background: #e4e0d5;
+        will-change: transform;
+        pointer-events: none;
+    }
+
+    /* keeps the page-one background and the page-two image lined up
+       when page one is taller than the screen */
+    .page-one-bg { height: var(--page-one-height, 100vh); }
+
+    /* static again: relative positioning applied the desktop left/top offsets and pushed the text off screen */
+    .tagline, .hero-cta {
+        position: static;
+        transform: none;
+        width: 100%;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    /* fixed-height box: reserves the same space regardless of which tagline sentence is showing,
+       so the button and paragraph below never shift up or down as the text types/erases */
+    .tagline {
+        height: calc(var(--tagline-size) * 1.25 * 2);
+        overflow: hidden;
+        margin-top: 30px;
+    }
+
+    .tagline-text { font-size: 28px; line-height: 1.25; text-align: center; }
+
+    .hero-cta { margin-top: 5px; }
+    .write-button { margin-bottom: 9px; }
+
+    /* moved further down from the button, independent of tagline length */
+    .hero-paragraph { font-size: 12px; margin: 22px auto 0; padding: 0 10px; text-align: center; }
+
+    .topbar { padding: 16px; }
+
+    /* top bar fonts */
+    .topbar .title { font-size: 22px; }
+    .mobile-menu-link { font-size: 12px; }
+    .opening-typing { font-size: 16px; }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .opening-scene { display: none; }
+    .topbar { opacity: 1; pointer-events: auto; }
+    .tagline, .stamp-holder, .hero-cta { opacity: 1; }
+    .tagline-text::after { animation: none; }
+}
+
+/* ==========================================================================
+   PAGE TWO — WRITE FLOW
+   ========================================================================== */
+
+#page-two {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 4vw;
+    padding: 0 8vw 33vh;
+}
+
+.write-flow {
+    position: relative;
+    z-index: 1;
+    width: calc(min(46vw, 640px));
+}
+
+.write-prompt-wrap {
+    position: relative;
+    margin-bottom: 29px;
+}
+
+.write-step-number {
+    position: absolute;
+    left: 99px;
+    top: -55px;
+    z-index: 0;
+    font-family: "Libre Caslon Text", serif;
+    font-style: italic;
+    font-size: 170px;
+    line-height: 1;
+    color: rgba(253, 231, 234, 0.14);
+    pointer-events: none;
+    user-select: none;
+}
+
+.write-prompt {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0;
+    margin-left: 80px;
+    font-family: "Libre Caslon Text", sans-serif;
+    font-style: italic;
+    font-size: 60px;
+    line-height: 1.25;
+
+    color: transparent;
+    background:
+        radial-gradient(circle at 14% 35%, #fff 0 2px, transparent 2.4px),
+        radial-gradient(circle at 42% 68%, #fff 0 1.6px, transparent 2px),
+        radial-gradient(circle at 75% 24%, #fff 0 2.2px, transparent 2.6px),
+        linear-gradient(100deg, #fde7ea71, var(--ink-3), #fde7ea71);
+    background-size: 120px 60px, 150px 72px, 180px 68px, 240% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--ink-3) 35%, transparent));
+    animation: fx-starlight 3.6s linear infinite;
+
+    opacity: 1;
+    transition: opacity 0.25s ease, filter 0.25s ease;
+}
+
+.write-descriptions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    margin-top: 24px;
+    max-width: 650px;
+}
+
+.write-description {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-left: 80px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    filter: blur(8px);
+    transition: opacity 0.5s ease, filter 0.5s ease, visibility 0s linear 0.5s;
+}
+
+.write-description.active {
+    opacity: 1;
+    visibility: visible;
+    filter: blur(0);
+    transition: opacity 0.5s ease, filter 0.5s ease, visibility 0s;
+}
+
+.write-description p {
+    margin: 0;
+    font-family: "Libre Caslon Text", serif;
+    font-size: 21px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: 1.7;
+    text-align: left;
+    letter-spacing: normal;
+
+    color: transparent;
+    background:
+        radial-gradient(circle at 14% 35%, #fff 0 2px, transparent 2.4px),
+        radial-gradient(circle at 42% 68%, #fff 0 1.6px, transparent 2px),
+        radial-gradient(circle at 75% 24%, #fff 0 2.2px, transparent 2.6px),
+        linear-gradient(100deg, #fde7ea71, var(--ink-3), #fde7ea71);
+    background-size: 120px 60px, 150px 72px, 180px 68px, 240% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--ink-3) 35%, transparent));
+    animation: fx-starlight 3.6s linear infinite;
+}
+
+@keyframes fx-starlight {
+    0%   { background-position: 0 0, 0 0, 0 0, 120% 0; }
+    100% { background-position: 120px 0, -150px 0, 180px 0, -120% 0; }
+}
+
+.write-nav {
+    position: absolute;
+    left: 80px;
+    top: 0; /* set dynamically by script.js */
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.write-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    background: transparent;
+    border: 0;
+    color: #fde7ea83;
+    cursor: pointer;
+    transition: color 0.25s ease;
+}
+
+.write-nav-btn svg {
+    width: 25px;
+    height: 25px;
+}
+
+.write-nav-btn:hover {
+    color: #fde7eacc;
+}
+
+/* PHOTO STACK */
+
+.postcard-stack {
+    position: relative;
+    flex-shrink: 0;
+    width: min(34vw, 620px);
+    aspect-ratio: 1.42;
+    transform: translate(-4vw, 35vh);
+}
+
+.stack-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transform: translate(60vw, 30px) rotate(var(--rot, 0deg));
+    transition: opacity 1.1s ease, transform 1.3s cubic-bezier(0.2, 0.7, 0.3, 1);
+    pointer-events: none;
+    filter: drop-shadow(0 10px 18px rgba(87, 63, 63, 0.28));
+    border-radius: 1px;
+}
+
+/* z-index reversed: green sits on top, blue in the middle, purple on the bottom */
+.stack-green  { --rot: -4deg; z-index: 3; }
+.stack-blue   { --rot: 3deg;  z-index: 2; transform: translate(calc(60vw + 14px), 50px) rotate(3deg); }
+.stack-purple { --rot: -2deg; z-index: 1; transform: translate(calc(60vw - 14px), 50px) rotate(-2deg); }
+
+/* all three photos arrive together as soon as page two scrolls into view */
+#page-two.in-view .stack-green {
+    opacity: 1;
+    transform: translateY(0) rotate(var(--rot));
+}
+
+#page-two.in-view .stack-blue {
+    opacity: 1;
+    transform: translateY(18px) rotate(3deg) translateX(14px);
+}
+
+#page-two.in-view .stack-purple {
+    opacity: 1;
+    transform: translateY(25px) rotate(-2deg) translateX(-10px);
+}
+
+/* while step 3 is active, rotate the purple card upright so the letter reads normally */
+#page-two.step-3 .stack-purple {
+    transform: translateY(25px) rotate(92deg) translateX(-10px);
+}
+
+/* stepping through the write flow peels a card off the top of the stack:
+   step 2 removes green, step 3 removes blue, step 4 removes purple */
+#page-two.step-2 .stack-green,
+#page-two.step-3 .stack-green,
+#page-two.step-4 .stack-green {
+    opacity: 0;
+    transform: translate(60vw, 30px) rotate(var(--rot));
+}
+
+#page-two.step-3 .stack-blue,
+#page-two.step-4 .stack-blue {
+    opacity: 0;
+    transform: translate(calc(60vw + 14px), 50px) rotate(3deg);
+}
+
+#page-two.step-4 .stack-purple {
+    opacity: 0;
+    transform: translate(calc(60vw - 10px), 64px) rotate(-2deg);
+}
+
+/* forces every card back to its off-screen "closed" position when the user
+   has scrolled well into page three — wins over the .in-view / .step-* rules
+   above purely by coming later in the file, same specificity */
+#page-two.exiting .stack-green {
+    opacity: 0;
+    transform: translate(60vw, 30px) rotate(var(--rot));
+}
+
+#page-two.exiting .stack-blue {
+    opacity: 0;
+    transform: translate(calc(60vw + 14px), 50px) rotate(3deg);
+}
+
+#page-two.exiting .stack-purple {
+    opacity: 0;
+    transform: translate(60vw, 30px) rotate(var(--rot));
+}
+
+@media (max-width: 900px) {
+    #page-two {
+        flex-direction: column;
+        justify-content: center;
+        gap: 40px;
+        padding: 90px 24px 60px;
+        text-align: center;
+    }
+
+    .write-flow { width: 100%; }
+    .write-step-number { left: 0; font-size: 90px; top: -0.4em; }
+    .write-prompt { font-size: 28px; margin-left: 0; }
+    .write-field { align-items: center; }
+    .postcard-stack { width: min(80vw, 420px); margin-top: 0; }
+
+    .write-nav { margin-left: 0; }
+}
+
+/* ==========================================================================
+   PAGE THREE — ABOUT
+   ========================================================================== */
+
+#page-three {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;   /* still feels like a full "page" */
+    height: auto;        /* grows with content instead of being locked */
+    padding: 47vh 8vw 9vh;
+    box-sizing: border-box;
+    scroll-margin-top: 80px;
+}
+
+.page-three-inner {
+    width: 100%;
+    max-width: 700px;
+}
+
+.page-three-title {
+    margin: 0 0 48px;
+    font-family: "Libre Caslon Text", serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 1.15;
+    color: var(--text);
+}
+
+.page-three-body {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.page-three-body p {
+    margin: 0;
+    font-family: "Libre Caslon Text", serif;
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.75;
+    color: var(--text);
+}
+
+.page-three-signoff {
+    margin: 40px 0 0;
+    font-family: "Libre Caslon Text", serif;
+    font-size: 17px;
+    color: var(--text);
+    opacity: 0.75;
+}
+
+.page-three-signoff em {
+    font-style: italic;
+}
+
+.page-three-cta {
+    margin-top: 0px;
+}
+
+/* fade each piece in, staggered, once the section scrolls into view */
+#page-three .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+#page-three.in-view .reveal {
+    opacity: 1;
+    transform: none;
+}
+
+.about-scribble {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    margin-left: 15px;
+    vertical-align: middle;
+    transform: translateY(-4px);
+    pointer-events: none;
+
+    /* paint the text colour through the scribble's shape */
+    background-color: var(--text);
+    -webkit-mask-image: url("logo/scribble.gif");
+    mask-image: url("logo/scribble.gif");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+
+/* stagger order: title, then each paragraph, then signoff, then button */
+#page-three.in-view .page-three-title                { transition-delay: 0s;    }
+#page-three.in-view .page-three-body p:nth-child(1)  { transition-delay: 0.15s; }
+#page-three.in-view .page-three-body p:nth-child(2)  { transition-delay: 0.30s; }
+#page-three.in-view .page-three-body p:nth-child(3)  { transition-delay: 0.45s; }
+#page-three.in-view .page-three-body p:nth-child(4)  { transition-delay: 0.60s; }
+#page-three.in-view .page-three-body p:nth-child(5)  { transition-delay: 0.75s; }
+#page-three.in-view .page-three-signoff              { transition-delay: 0.90s; }
+#page-three.in-view .page-three-cta                  { transition-delay: 1.05s; }
+
+/* ---- phones ---- */
+
+@media (max-width: 700px) {
+    #page-three {
+        padding: 90px 24px 70px;
+        align-items: flex-start;
+    }
+
+    .page-three-title { font-size: 44px; margin-bottom: 36px; }
+    .page-three-body p { font-size: 16px; line-height: 1.7; }
+    .page-three-body { gap: 18px; }
+    .page-three-signoff { margin-top: 32px; font-size: 15px; }
+    .page-three-cta { margin-top: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #page-three .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ==========================================================================
+   SITE FOOTER
+   ========================================================================== */
+
+.site-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    padding: 30px 8vw 0px;
+    background: #e4e0d5;
+    font-family: "Geist Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+    opacity: 0.7;
+}
+
+.site-footer a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.site-footer a:hover {
+    border-bottom-color: currentColor;
+}
+
+.site-footer-dot {
+    opacity: 0.5;
+}
+
+/* pushes contact/privacy to the right on wide screens */
+.site-footer-spacer {
+    flex: 1;
+}
+
+@media (max-width: 700px) {
+    .site-footer {
+        padding: 28px 24px 34px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .site-footer-spacer { display: none; }
+}
+
+@font-face {
+    font-family: "Beth Ellen";
+    src: url("font/beth_ellen.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Geist Mono";
+    src: url("font/geist_mono.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Libre Caslon Text";
+    src: url("font/libre_caslon.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Libre Caslon Text";
+    src: url("font/libre_caslon_italic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Libre Caslon Text";
+    src: url("font/libre_caslon.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}

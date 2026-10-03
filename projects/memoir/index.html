@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- preload so mobile connections start fetching the fonts before the CSS is even parsed -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Beth+Ellen&family=Geist+Mono:wght@400&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Beth+Ellen&family=Geist+Mono:wght@400&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=18">
+    <link rel="icon" href="logo/postage_stamp.png">
+    <meta name="description" content="Memoir — a place to write letters meant to be found later. (Static design preview.)">
+    <title>Memoir</title>
+</head>
+
+<body>
+
+<div class="backdrop" aria-hidden="true">
+    <div class="backdrop-page page-one-bg"></div>
+    <div class="backdrop-page page-two-bg"></div>
+    <div class="backdrop-page page-three-bg"></div>
+</div>
+
+<div class="opening-scene" id="opening-scene" aria-hidden="true">
+    <canvas id="postcard-canvas"></canvas>
+    <!-- MOBILE ONLY: solid page-one colour over the postcard + label. Scrolled with the page by script.js.
+         Must stay above the canvas/label and below the "dear," typing. -->
+    <div class="page-one-cover" id="page-one-cover"></div>
+    <p class="opening-typing" id="opening-typing" aria-hidden="true"></p>
+</div>
+
+<!-- TOP BAR -->
+<header class="topbar">
+    <p class="title" id="home-trigger" role="button" tabindex="0">Memoir</p>
+
+    <!-- DESKTOP ONLY -->
+    <nav class="topbar-nav">
+        <a class="nav-link caps" href="#page-three" id="about-trigger">about</a>
+    </nav>
+
+    <!-- MOBILE ONLY: "from, username" (if signed in) sits next to the three-line menu button -->
+    <div class="topbar-mobile-controls">
+        <button type="button" class="menu-trigger" id="menu-trigger" aria-label="Menu" aria-haspopup="true" aria-expanded="false" aria-controls="mobile-menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <a class="mobile-menu-link" href="#page-three" id="mobile-about-trigger">about</a>
+    </div>
+</header>
+
+<main class="page">
+    <section class="hero" id="page-one">
+        <div class="tagline">
+            <p class="tagline-text" id="tagline-text" aria-hidden="true"></p>
+        </div>
+
+        <div class="hero-cta" id="hero-cta">
+            <button type="button" class="write-button" id="write-trigger">write something to keep</button>
+            <p class="hero-paragraph">Some words are meant to be found later. Memoir gives you a place to write letters for the people you love, the people you miss, or the person you are still becoming.  Write what you want remembered, choose when you want it to be found, and let your letter wait quietly until its time comes.</p>
+            <p class="hero-paragraph">Perhaps one day, when the moment is right, someone will find exactly what you meant to leave behind; because sometimes, the things we cannot say today are the things we most want to remember tomorrow.</p>
+        </div>
+    </section>
+
+    <section class="page-section" id="page-two">
+        <div class="write-flow" id="write-flow">
+
+            <div class="write-prompt-wrap">
+                <span class="write-step-number" id="write-step-number" aria-hidden="true">1.</span>
+                <p class="write-prompt" id="write-prompt" aria-live="polite"></p>
+            </div>
+
+            <div class="write-descriptions">
+                <div class="write-description write-description-1 active" data-description="1">
+                    <p>Every letter begins with someone in mind. Give your words a name to drift to, and the day that belongs to them, so that even among names that sound alike, your letter will know where to wander.</p>
+                    <p>Then as well, every story left behind ought to have a place to begin. A letter may travel far from where it began, but one day—long after it was written, your special person will know who once sat down and wrote them.</p>
+                </div>
+
+                <div class="write-description write-description-2" data-description="2">
+                    <p>Some letters know exactly where they are going, while others are content to wander until they are found. Give yours a place to arrive, if there is somewhere in the world you hope it reaches in time.</p>
+                    <p>An address may only be a few lines on a page, but sometimes that is all a letter needs to find its way home. The rest can be left to time. Let it travel quietly until the moment it is meant to arrive.</p>
+                </div>
+
+                <div class="write-description write-description-3" data-description="3">
+                    <p>Leave behind the things you want remembered — a feeling, a thought, a promise, or something you were never quite able to say. Write for someone you love, someone you miss, or the person you will become when these days are only memories.</p>
+                    <p>Choose when you want it to be found, then let the letter wait quietly in the years between. Perhaps one day, when the moment is right, someone will open it and find a little piece of you still waiting there.</p>
+                </div>
+
+                <div class="write-description write-description-4" data-description="4">
+                    <p>Some letters arrive when you least expect them. Check your inbox from time to time; somewhere, someone may have left a few words meant to find you. It could be a memory you had forgotten, a thought sent from far away, or a message written long before you were ready to read it.</p>
+                    <p>You never know what might be waiting quietly on the other side of time. Perhaps one day, you will open your inbox and find something you never knew you needed to hear.</p>
+                </div>
+            </div>
+
+            <div class="write-nav">
+                <button type="button" class="write-nav-btn" id="write-prev" aria-label="Previous">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <button type="button" class="write-nav-btn" id="write-next" aria-label="Next">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="postcard-stack" id="postcard-stack" aria-hidden="true">
+            <img class="stack-photo stack-green"  src="samples/green.png"  alt="">
+            <img class="stack-photo stack-blue"   src="samples/blue.png"   alt="">
+            <img class="stack-photo stack-purple" src="samples/purple.png" alt="">
+        </div>
+    </section>
+
+    <section class="page-section" id="page-three">
+    <div class="page-three-inner">
+
+        <h2 class="page-three-title reveal">
+            about.<span class="about-scribble" aria-hidden="true"></span>
+        </h2>
+
+        <div class="page-three-body">
+
+            <p class="reveal">
+                Memoir began with a question I never quite knew how to answer —
+                <em>do I say this now, or do I wait?</em> And if I wait, 
+                what am I waiting for? A better moment? A little more courage?
+                The moment when someone is finally ready to hear what I have to say?
+                Some words felt too early for the current; perhaps words could simply
+                be left somewhere, drifting quietly until the time was right.  
+            </p>
+
+            <p class="reveal">
+                Some words wait years to be understood. Not because they're complicated —
+                because we have to live past them before they make sense. A promise grows
+                stronger when it's remembered years later. A flower is lovelier when 
+                it's grown from a seed someone planted without knowing if it would bloom.
+            </p>
+
+            <p class="reveal">
+                I kept thinking: how romantic would it be, to receive something from years
+                ago? From someone who thought of you then, before they knew who you'd
+                become. Or from yourself — a letter from a day you've long forgotten,
+                arriving when you finally need it.
+            </p>
+            <!-- <p class="page-three-signoff reveal"><em>— written slowly, for later</em></p> -->
+        </div>
+
+    </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <span>© 2026 Memoir</span>
+    <span class="site-footer-dot" aria-hidden="true">·</span>
+    <span>a little something left behind</span>
+    <span class="site-footer-spacer"></span>
+    <a href="#">contact</a>
+    <span class="site-footer-dot" aria-hidden="true">·</span>
+    <a href="#">privacy</a>
+</footer>
+
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://unpkg.com/three@0.170.0/build/three.module.js"
+    }
+}
+</script>
+<script type="module" src="script.js?v=15"></script>
+
+</body>
+</html>

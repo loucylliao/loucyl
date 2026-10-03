@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+        <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="mobile.css">
+        <link rel="icon" type="image/x-icon" href="attachments/logo.png">
+        <title>Loucyl Liao</title>
+    </head>
+    <body>
+        <div class="page-progress" aria-hidden="true"><span id="page-progress-bar"></span></div>
+        <header class="mobile-header">
+            <div class="mobile-progress" aria-hidden="true"><span id="mobile-progress-bar"></span></div>
+            <img src="attachments/logo.png" alt="">
+            <a href="#intro" class="mobile-brand">Loucyl Liao</a>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" type="button"
+                    aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+                    <path d="M5 9h14M5 15h14"/>
+                </svg>
+            </button>
+        </header>
+        <div class="sidebar-scrim" id="sidebar-scrim"></div>
+
+        <nav class="sidebar" id="sidebar" aria-label="Sidebar" data-lenis-prevent>
+            <p class="sidebar-label">about</p>
+            <canvas id="lotus-logo" class="sidebar-logo"></canvas>
+            <h2 class="hero-subtitle">Loucyl Liao</h2>
+
+            <div class="sidebar-nav-wrap">
+                <p class="sidebar-label">find here</p>
+                <ol class="nav-list">
+
+                    <li class="nav-item" data-section="intro">
+                        <a href="#intro"><span class="nav-num">00</span><span class="accent">about</span>her</a>
+                        <ul class="sub-nav">
+                            <li data-spot="#intro .bio:not(.bio-closer)">bio</li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item" data-section="about">
+                        <a href="#about"><span class="nav-num">01</span><span class="accent">the girl</span> behind</a>
+                        <ul class="sub-nav">
+                            <li data-spot="#about .tree > li:nth-child(2)">college</li>
+                            <li data-spot="#about .tree > li:nth-child(3)">experience</li>
+                            <li data-spot="#about .her-button">biography</li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item" data-section="projects">
+                        <a href="#projects"><span class="nav-num">02</span>in the <span class="accent">making</span></a>
+                        <ul class="sub-nav">
+                            <li data-spot="#projects .project-list">web &amp; app</li>
+                            <li data-spot="#projects .art-section">3D &amp; animation</li>
+                            <li data-spot="#terminal-demo .file-tree">terminal/cli</li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item" data-section="more_stuffs">
+                        <a href="#more_stuffs"><span class="nav-num">03</span>more <span class="accent">stuffs</span></a>
+                        <ul class="sub-nav">
+                            <li data-spot=".shelf-painting">painting</li>
+                            <li data-spot=".shelf-books .book-group">library</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="sidebar-bottom">
+
+                <div class="sidebar-social-wrap">
+                    <p class="sidebar-label">find me</p>
+                    <div class="sidebar-social">
+                        <a href="https://discord.com/users/1308114843513000000" target="_blank" rel="noopener" aria-label="Discord">
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                            </svg>
+                        </a>
+                        <a href="https://instagram.com/lovceyl" target="_blank" rel="noopener" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <a href="https://github.com/loucylliao" target="_blank" rel="noopener" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/loucylliao" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect x="2" y="9" width="4" height="12"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="sidebar-footer">
+                    <p class="sidebar-label">based</p>
+                    <p class="sidebar-locale">EN · Baguio,<br>Philippines</p>
+                    <p class="sidebar-clock" id="sidebar-clock">--:--:-- --</p>
+                </div>
+
+            </div>
+
+            <button class="sidebar-close" type="button" aria-label="Close menu">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">
+                    <path d="M2.5 2.5 L9.5 9.5 M9.5 2.5 L2.5 9.5"/>
+                </svg>
+            </button>
+        </nav>
+
+
+
+        <main class="main-content">
+            <div class="ascii-banner">
+                <pre id="ascii-animation"></pre>
+            </div>
+        <div class="content-wrapper">
+
+            <!-- Hero Section -->
+            <section id="intro" class="hero">
+                <p class="section-title">00 PROLOGUE</p>
+                <h1 class="logo-heading">
+                    <span class="logo-img-wrap"><img src="attachments/texts/loucyl_text.png" alt="Loucyl"></span>
+                    <span class="logo-text">Liao</span>
+                </h1>
+                <h2 class="hero-subtitle">a self-taught<span class="accent">developer and designer</span>, a work in progress.</h2>
+                <p class="section-title">Baguio, Philippines</p>
+                <p class="bio">
+                    I often <span class="accent">dream</span> of ideas, <img src="attachments/texts/scribble.gif" alt="" class="scribble-icon">
+                    <span class="accent">craft</span> websites and software, <span class="accent">learn</span> engineering,
+                    and 3D model for the cool stuffs.
+                </p>
+                <p class="bio">
+                    In my free time, I'm nerdy about esotericism, human behavior,
+                    literature, arts, music, and — oh well, games. While on the side, a corporate slave.
+                </p>
+                <p class="bio bio-closer">
+                    there's a little more of me scattered around here —
+                    meet <a class="bio-chip" href="#about">the girl behind</a>,
+                    see what's <a class="bio-chip" href="#projects">in the making</a>,
+                    and wander through <a class="bio-chip" href="#more_stuffs">more stuffs</a>
+                    i've picked up along the way.
+                </p>
+                <p class="bio bio-closer">
+                    if you find something worth talking about,
+                    <a class="bio-chip" href="mailto:liaoloucyl@gmail.com">say hello</a>.
+                </p>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="about">
+                <h2 class="section-title">01 PORTRAIT</h2>
+
+                <div class="portrait-wrap">
+                    <img class="about-portrait" src="attachments/portrait.png" alt="loucyl">
+                    <pre id="butterfly-animation" class="ascii-butterfly"></pre>
+
+                    <button class="her-button" type="button" data-project="biography" aria-label="Read her biography">
+                        her
+                    </button>
+                </div>
+
+                <div class="about-right">
+                    <div class="about-logo">
+                        <span class="logo-img-wrap"><img src="attachments/texts/the_girl.png" alt="the girl"></span>
+                        <span class="logo-text">behind.</span>
+                    </div>
+
+                    <ul class="tree">
+                        <li>
+                            <span class="tree-label">2004</span>
+                            <ul>
+                                <li><span class="tree-label">born @manila-ph</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="tree-label">college <span class="accent">@feu-tech</span> 2y;</span>
+                            <ul>
+                                <li><span class="tree-label">cs .software-eng</span></li>
+                                <li><span class="tree-label">acm .member .officer</span></li>
+                                <li><span class="tree-label">ched .scholar</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="tree-label">experience <span class="accent">@cognizant</span></span>
+                            <ul>
+                                <li><span class="tree-label">{ 2025, 5mo }</span></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="tree-label">present <span class="accent">@foundever</span></span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Experience / Projects Section -->
+            <section id="projects" class="projects">
+                <h2 class="section-title">02 WORKS</h2>
+
+                <div class="projects-header">
+                    <h2 class="hero-subtitle">web<span class="accent">&</span>app</h2>
+                    <div class="projects-logo">
+                        <span class="logo-text">in the</span>
+                        <span class="logo-img-wrap"><img src="attachments/texts/making.png" alt="making"></span>
+                    </div>
+                </div>
+
+                <ol class="project-list">
+                    <li class="project-row" data-project="memoir" role="button" tabindex="0"
+                        aria-label="Open Memoir project details">
+                        <div class="project-thumb">
+                            <img src="attachments/projects/memoir.png" alt="Memoir">
+                        </div>
+                        <div class="project-body">
+                            <div class="project-head">
+                                <h3 class="project-name">Memoir</h3>
+                                <span class="project-year-end">2026</span>
+                            </div>
+                            <p class="project-kind">Web · Digital Letters</p>
+                            <p class="project-desc">
+                                a place to let words drift through time
+                                until they find the person who was meant to read them.
+                            </p>
+                            <p class="project-tags">PHP · MySQL · HTML · CSS · JavaScript</p>
+                        </div>
+                    </li>
+
+                    <li class="project-row project-row--algebrawl" data-project="algebrawl" role="button" tabindex="0"
+                        aria-label="Open Algebrawl project details">
+                        <div class="project-thumb">
+                            <img src="attachments/projects/algebrawl.png" alt="Algebrawl">
+                        </div>
+                        <div class="project-body">
+                            <div class="project-head">
+                                <h3 class="project-name">Algebrawl</h3>
+                                <span class="project-year-end">2024</span>
+                            </div>
+                            <p class="project-kind">App · Mathematics</p>
+                            <p class="project-desc">
+                                an arcade-style, turn-based educational math battle game
+                                originally created as a college course project in Java.
+                            </p>
+                            <p class="project-tags">Java · TypeScript · React 19 · Tailwind CSS · KaTeX</p>
+                        </div>
+                    </li>
+                </ol>
+
+                <div class="art-section">
+                    <div class="art-grid">
+
+                        <figure class="art-item art-item-slot">
+                            <canvas id="butterfly-curve"></canvas>
+                        </figure>
+
+                        <h2 class="art-subtitle">3D<span class="accent">&</span> animation</h2>
+
+                        <span class="art-caption" id="curve-eq"></span>
+
+                        <figure class="art-item art-item-butterfly">
+                            <div class="art-butterfly-hybrid mode-static" id="art-butterfly-scene">
+                                <img class="butterfly-layer butterfly-still" src="attachments/projects/butterfly_origami.png" alt="Butterfly origami (still)">
+                                <img class="butterfly-layer butterfly-gif" src="attachments/projects/butterfly_origami.gif" alt="">
+                                <canvas id="art-butterfly-canvas"></canvas>
+
+                                <div class="hint hint--circle" style="--hint-top: 41%; --hint-left: 27%;">
+                                    <span class="hint-dot"></span>
+                                    <div class="hint-content"><p>click to play animation</p></div>
+                                </div>
+
+                                <div class="hint hint--square" style="--hint-top: 55%; --hint-left: 47%; --hint-delay: 0.5s;">
+                                    <span class="hint-dot"></span>
+                                    <div class="hint-content"><p>hold and grab</p></div>
+                                </div>
+                            </div>
+                        </figure>
+                    </div>
+                </div>
+
+                <!-- TERMINAL -->
+                <h2 class="terminal-subtitle">terminal /<span class="accent">cli</span></h2>
+                <div class="terminal-demo" id="terminal-demo">
+
+                    <div class="file-tree">
+
+                        <div class="tree-row tree-row--folder">
+                            <svg class="tree-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 4.5v7a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H8L6.5 3h-4a1 1 0 0 0-1 1z"/></svg>
+                            <span>src</span>
+                        </div>
+
+                        <div class="tree-children">
+                            <div class="tree-row tree-file" data-file="readme" data-type="txt">
+                                <svg class="tree-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1.5H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5.5L9 1.5z"/><path d="M9 1.5v4h4"/></svg>
+                                <span>readme.txt</span>
+                            </div>
+                            <div class="tree-row tree-row--folder">
+                                <svg class="tree-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 4.5v7a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H8L6.5 3h-4a1 1 0 0 0-1 1z"/></svg>
+                                <span>python</span>
+                            </div>
+
+                            <div class="tree-children">
+                                <div class="tree-row tree-file" data-file="register" data-type="py">
+                                    <svg class="tree-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1.5H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5.5L9 1.5z"/><path d="M9 1.5v4h4"/></svg>
+                                    <span>register.py</span>
+                                </div>
+                                <div class="tree-row tree-file" data-file="write" data-type="py">
+                                    <svg class="tree-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1.5H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5.5L9 1.5z"/><path d="M9 1.5v4h4"/></svg>
+                                    <span>write.py</span>
+                                </div>
+                            </div>
+
+                            <div class="tree-row tree-row--folder">
+                                <svg class="tree-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 4.5v7a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1H8L6.5 3h-4a1 1 0 0 0-1 1z"/></svg>
+                                <span>asm</span>
+                            </div>
+
+                            <div class="tree-children">
+                                <div class="tree-row tree-file" data-file="zodiac" data-type="asm">
+                                    <svg class="tree-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1.5H4a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5.5L9 1.5z"/><path d="M9 1.5v4h4"/></svg>
+                                    <span>zodiac.asm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="terminal terminal--preview">
+                        <pre class="terminal-out"></pre>
+                        <div class="terminal-prompt">
+                            <span class="terminal-caret">&gt;</span>
+                            <input class="terminal-in" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- More Stuffs Section -->
+            <section id="more_stuffs" class="more_stuffs">
+                <h2 class="section-title">03 COMPENDIUM</h2>
+
+                <div class="more-stuffs-heading">
+                    <span class="logo-text">more</span>
+                    <span class="logo-img-wrap"><img src="attachments/texts/stuffs.png" alt="stuffs"></span>
+                    <div class="shelf-spotlight" aria-hidden="true"></div>
+                </div>
+
+                <h2 class="terminal-subtitle">art<span class="accent">&</span>literature</h2>
+
+                <div class="shelf shelf-books">
+                    <div class="shelf-row">
+
+                        <figure class="shelf-painting">
+                            <div class="art-thumb">
+                                <img src="attachments/books_artwork/painting.png" alt="Painting">
+                            </div>
+                        </figure>
+
+                        <div class="book-group">
+                            <button class="book book-divinerivals" type="button" data-title="Divine Rivals" data-author="Rebecca Ross" aria-label="Divine Rivals by Rebecca Ross">
+                                <span class="book-spine" aria-hidden="true">
+                                    <span class="book-title">Divine Rivals</span>
+                                    <span class="book-author">RR</span>
+                                </span>
+                                <img class="book-cover" src="attachments/books_artwork/divinerivals.jpg" alt="">
+                            </button>
+                            <button class="book book-alchemised" type="button" data-title="Alchemised" data-author="Unknown" aria-label="Alchemised">
+                                <span class="book-spine" aria-hidden="true">
+                                    <span class="book-title">Alchemised</span>
+                                    <span class="book-author">SLY</span>
+                                </span>
+                                <img class="book-cover" src="attachments/books_artwork/alchemised.jpg" alt="">
+                            </button>
+                            <button class="book book-homebody" type="button" data-title="home body" data-author="Rupi Kaur" aria-label="home body by Rupi Kaur">
+                                <span class="book-spine" aria-hidden="true">
+                                    <span class="book-title">home body</span>
+                                    <span class="book-author">RK</span>
+                                </span>
+                                <img class="book-cover" src="attachments/books_artwork/homebody.jpg" alt="">
+                            </button>
+                            <button class="book book-ineverpromised" type="button" data-title="I Never Promised You a Rose Garden" data-author="Joanne Greenberg" aria-label="I Never Promised You a Rose Garden by Joanne Greenberg">
+                                <span class="book-spine" aria-hidden="true">
+                                    <span class="book-title">I Never Promised You a Rose Garden</span>
+                                    <span class="book-author">JG</span>
+                                </span>
+                                <img class="book-cover" src="attachments/books_artwork/ineverpromisedyouarosegarden.jpg" alt="">
+                            </button>
+                            <button class="book book-thesecrethistory" type="button" data-title="The Secret History" data-author="Donna Tartt" aria-label="The Secret History by Donna Tartt">
+                                <span class="book-spine" aria-hidden="true">
+                                    <span class="book-title">The Secret History</span>
+                                    <span class="book-author">DT</span>
+                                </span>
+                                <img class="book-cover" src="attachments/books_artwork/thesecrethistory.jpg" alt="">
+                            </button>
+                        </div>
+
+                        <div class="book-group">
+                            <button class="book book-lookingforalaska" type="button" data-title="Looking for Alaska" data-author="John Green" aria-label="Looking for Alaska by John Green">
+                                <span class="book-spine" aria-hidden="true">
+                                    <span class="book-title">Looking for Alaska</span>
+                                    <span class="book-author">JG</span>
+                                </span>
+                                <img class="book-cover" src="attachments/books_artwork/lookingforalaska.jpg" alt="">
+                            </button>
+                            <button class="book book-alittlelife is-front" type="button" data-title="A Little Life" data-author="Hanya Yanagihara" aria-label="A Little Life by Hanya Yanagihara">
+                                <span class="book-spine" aria-hidden="true">
+                                    <span class="book-title">A Little Life</span>
+                                    <span class="book-author">HY</span>
+                                </span>
+                                <img class="book-cover" src="attachments/books_artwork/alittlelife.jpg" alt="">
+                            </button>
+                            <button class="book book-nolongerhuman" type="button" data-title="No Longer Human" data-author="Osamu Dazai" aria-label="No Longer Human by Osamu Dazai">
+                                <span class="book-spine" aria-hidden="true">
+                                    <span class="book-title">No Longer Human</span>
+                                    <span class="book-author">OD</span>
+                                </span>
+                                <img class="book-cover" src="attachments/books_artwork/nolongerhuman.jpg" alt="">
+                            </button>
+                            <button class="book book-thestranger" type="button" data-title="The Stranger" data-author="Albert Camus" aria-label="The Stranger by Albert Camus">
+                                <span class="book-spine" aria-hidden="true">
+                                    <span class="book-title">The Stranger</span>
+                                    <span class="book-author">AC</span>
+                                </span>
+                                <img class="book-cover" src="attachments/books_artwork/thestranger.jpg" alt="">
+                            </button>
+                            <button class="book book-whitenights" type="button" data-title="White Nights" data-author="Fyodor Dostoevsky" aria-label="White Nights by Fyodor Dostoevsky">
+                                <span class="book-spine" aria-hidden="true">
+                                    <span class="book-title">White Nights</span>
+                                    <span class="book-author">FD</span>
+                                </span>
+                                <img class="book-cover" src="attachments/books_artwork/whitenights.jpg" alt="">
+                            </button>
+                        </div>
+
+                    </div>
+                    <div class="shelf-board" aria-hidden="true"></div>
+                </div>
+            </section>
+        </div>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-grid">
+
+                <div class="footer-id">
+                    <p class="footer-copyright">©2026 Loucyl Liao</p>
+
+                    <div class="footer-meta">
+                        <div class="footer-meta-row">
+                            <svg class="footer-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="9"/>
+                                <path d="M12 7v5l3 2"/>
+                            </svg>
+                            <div class="footer-meta-text">
+                                <span>UTC+8</span>
+                                <span class="footer-clock" id="footer-clock">--:-- --</span>
+                            </div>
+                        </div>
+
+                        <div class="footer-meta-row">
+                            <svg class="footer-meta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="9"/>
+                                <path d="M3 12h18"/>
+                                <path d="M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18z"/>
+                            </svg>
+                            <div class="footer-meta-text">
+                                <span>16.4023° N</span>
+                                <span>120.5960° E</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-label">CONTACT</p>
+                    <ul class="footer-list">
+                        <li><a href="https://discord.com/users/1308114843513000000" target="_blank" rel="noopener">Discord<svg class="footer-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9L9 3"/><path d="M5 3h4v4"/></svg></a></li>
+                        <li><a href="https://instagram.com/lovceyl" target="_blank" rel="noopener">Instagram<svg class="footer-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9L9 3"/><path d="M5 3h4v4"/></svg></a></li>
+                        <li><a href="https://github.com/loucylliao" target="_blank" rel="noopener">GitHub<svg class="footer-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9L9 3"/><path d="M5 3h4v4"/></svg></a></li>
+                        <li><a href="https://linkedin.com/in/loucylliao" target="_blank" rel="noopener">LinkedIn<svg class="footer-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9L9 3"/><path d="M5 3h4v4"/></svg></a></li>
+                        <li><a href="mailto:liaoloucyl@gmail.com">Email</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <p class="footer-label">INDEX</p>
+                    <ul class="footer-list">
+                        <li><a href="#intro">Prologue</a></li>
+                        <li><a href="#about">Portrait</a></li>
+                        <li><a href="#projects">Works</a></li>
+                        <li><a href="#more_stuffs">Compendium</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </footer>
+
+        <!-- TERMINAL MODAL -->
+        <div class="terminal-modal" id="terminal-modal" hidden>
+            <div class="terminal-modal-backdrop" data-terminal-close></div>
+
+            <div class="terminal-modal-window" role="dialog" aria-modal="true" aria-labelledby="terminal-modal-label">
+                <div class="terminal-modal-header">
+                    <span class="terminal-modal-title" id="terminal-modal-label">
+                        loucyl@admin: ~
+                        <span class="terminal-modal-file" id="terminal-modal-file"></span>
+                    </span>
+                    <button class="terminal-modal-close" type="button" aria-label="Close terminal" data-terminal-close>
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"
+                             stroke-linecap="round" aria-hidden="true">
+                            <path d="M4 4L12 12M12 4L4 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <pre class="terminal-out" id="terminal-modal-out"></pre>
+
+                <div class="terminal-prompt">
+                    <span class="terminal-caret">&gt;</span>
+                    <input class="terminal-in" id="terminal-modal-in" type="text"
+                           autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECT DETAIL SHEET -->
+        <div class="project-sheet" id="project-sheet" hidden data-lenis-prevent>
+            <div class="project-sheet-scrim" data-project-close></div>
+
+            <article class="project-sheet-panel" role="dialog" aria-modal="true" aria-labelledby="project-sheet-title">
+                <div class="sheet-progress" aria-hidden="true"><span id="sheet-progress-bar"></span></div>
+                <header class="project-sheet-bar">
+                    <span class="project-sheet-crumb">
+                        <span class="crumb-name">Loucyl Liao</span>
+                        <span class="crumb-sep">—</span>
+                        <span class="crumb-project" id="project-sheet-crumb"></span>
+                    </span>
+                    <div class="project-sheet-actions">
+                        <button class="project-sheet-fs" id="project-sheet-fs" type="button"
+                            aria-label="Enter full screen" aria-pressed="false" hidden>
+                            <svg class="fs-icon fs-icon--enter" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M1.5 4.5 V1.5 H4.5 M7.5 1.5 H10.5 V4.5 M10.5 7.5 V10.5 H7.5 M4.5 10.5 H1.5 V7.5"/>
+                            </svg>
+                            <svg class="fs-icon fs-icon--exit" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+                                stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4.5 1.5 V4.5 H1.5 M10.5 4.5 H7.5 V1.5 M7.5 10.5 V7.5 H10.5 M1.5 7.5 H4.5 V10.5"/>
+                            </svg>
+                        </button>
+                        <button class="project-sheet-close" type="button" data-project-close aria-label="Close project">
+                            <kbd>esc</kbd>
+                            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"
+                                stroke-linecap="round" aria-hidden="true">
+                                <path d="M2.5 2.5 L9.5 9.5 M9.5 2.5 L2.5 9.5"/>
+                            </svg>
+                        </button>
+                    </div>
+                </header>
+
+                <div class="project-sheet-scroll" data-lenis-prevent>
+                    <div class="project-sheet-sandbox" id="project-sheet-sandbox">
+                        <div class="project-body">
+                            <p class="project-section-title">00 SANDBOX</p>
+                        </div>
+                        <figure class="project-sheet-banner" id="project-sheet-banner-figure">
+                            <img id="project-sheet-banner" src="" alt="">
+                            <iframe
+                                id="project-sheet-iframe"
+                                src="about:blank"
+                                title="Project preview"
+                                loading="lazy"
+                                sandbox="allow-scripts allow-same-origin"
+                            ></iframe>
+                        </figure>
+                    </div>
+
+                    <!-- ============ MEMOIR ============ -->
+                    <section class="project-section" data-section="memoir" data-crumb="Memoir" hidden data-lenis-prevent>
+                        <p class="project-sheet-meta">Web · Digital Letters</p>
+                        <h2 class="project-sheet-title"><span class="accent">Memoir</span> — digital writing web app for letters that are meant to be found later.</h2>
+
+                        <div class="project-body">
+                            <div class="project-body-section">
+                                <p class="project-section-title">01 BACKGROUND</p>
+                                <p class="project-section-desc">
+                                    This project began as a learning ground. It started with something
+                                    as simple as building a login and sign-up system and connecting it
+                                    to a database. I taught myself PHP and MySQL from scratch, figuring
+                                    out authentication, sessions, database structures, and the rest of
+                                    the backend as I built.
+                                </p>
+                                <p class="project-section-desc">
+                                    Somewhere along the way, the project became a creative playground.
+                                    I explored JavaScript animations and interactive effects, learned
+                                    3D modeling, and experimented with different ways of bringing the
+                                    interface to life. What began as an exercise in backend development
+                                    gradually grew into a place where I could bring all those things
+                                    together.
+                                </p>
+                            </div>
+                            <div class="project-body-section">
+                                <p class="project-section-title">02 CONCEPT</p>
+                                <p class="project-section-desc">
+                                    Memoir began with a question I never quite knew how to answer —
+                                    do I say this now, or do I wait? And if I wait, what am I waiting
+                                    for? A better moment? A little more courage? The moment when
+                                    someone is finally ready to hear what I have to say? Some words
+                                    felt too early for the current; perhaps words could simply be left
+                                    somewhere, drifting quietly until the time was right.
+                                </p>
+                                <p class="project-section-desc">
+                                    Some words wait years to be understood. Not because they're
+                                    complicated — because we have to live past them before they make
+                                    sense. A promise grows stronger when it's remembered years later.
+                                    A flower is lovelier when it's grown from a seed someone planted
+                                    without knowing if it would bloom.
+                                </p>
+                                <p class="project-section-desc">
+                                    I kept thinking: how romantic would it be, to receive something
+                                    from years ago? From someone who thought of you then, before they
+                                    knew who you'd become. Or from yourself — a letter from a day
+                                    you've long forgotten, arriving when you finally need it.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="project-sheet-meta-grid">
+                            <div class="sheet-meta-col">
+                                <p class="sheet-meta-label">Role</p>
+                                <p class="sheet-meta-value">Designer &amp; developer — frontend, backend, database</p>
+                            </div>
+                            <div class="sheet-meta-col">
+                                <p class="sheet-meta-label">Stack</p>
+                                <p class="sheet-meta-value">PHP · MySQL · HTML · CSS · JavaScript</p>
+                            </div>
+                            <div class="sheet-meta-col">
+                                <p class="sheet-meta-label">Year</p>
+                                <p class="sheet-meta-value">2026</p>
+                            </div>
+                        </div>
+
+                        <div class="project-sheet-meta-grid project-sheet-meta-grid--single">
+                            <div class="sheet-meta-col">
+                                <p class="sheet-meta-label">Status</p>
+                                <p class="sheet-meta-value">In progress</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ============ ALGEBRAWL ============ -->
+                    <section class="project-section" data-section="algebrawl" data-crumb="Algebrawl" hidden data-lenis-prevent>
+                        <p class="project-sheet-meta">App · Mathematics</p>
+                        <h2 class="project-sheet-title"><span class="accent">Algebrawl</span> — an arcade-style, turn-based educational math battle game.</h2>
+
+                        <div class="project-body">
+                            <div class="project-body-section">
+                                <p class="project-section-title">01 BACKGROUND</p>
+                                <p class="project-section-desc">
+                                    Algebrawl began as a college course project in Java. The goal was
+                                    simple: make math practice feel like a game. Instead of worksheets,
+                                    you duel legendary mathematicians — every attack is a problem you
+                                    have to solve first, and every mistake costs you a life.
+                                </p>
+                                <p class="project-section-desc">
+                                    It was later rebuilt for the browser with React 19 and TypeScript.
+                                    The full arcade experience came with it — crisp math formulas,
+                                    retro 8-bit sound effects, a responsive 4:3 canvas, and a save
+                                    system so you can pick up where you left off.
+                                </p>
+                            </div>
+
+                            <div class="project-body-section">
+                                <p class="project-section-title">02 CONCEPT</p>
+                                <p class="project-section-desc">
+                                    Three bosses, each built around the topics they pioneered. Every
+                                    duel escalates — the later the legend, the harder the math.
+                                </p>
+
+                                <div class="boss-list">
+                                    <div class="boss-entry">
+                                        <div class="boss-id">
+                                            <p class="boss-name">Carl Gauss</p>
+                                            <span class="boss-title">Prince of <br> Mathematicians</span>
+                                        </div>
+                                        <p class="boss-topics">
+                                            Linear equations, sum &amp; product algebraic systems,
+                                            2×2 linear systems.
+                                        </p>
+                                    </div>
+
+                                    <div class="boss-entry">
+                                        <div class="boss-id">
+                                            <p class="boss-name">Isaac Newton</p>
+                                            <span class="boss-title">Father of Modern <br> Physics</span>
+                                        </div>
+                                        <p class="boss-topics">
+                                            Difference of squares, polynomial roots, matrix determinants,
+                                            Newtonian mechanics, kinematics.
+                                        </p>
+                                    </div>
+
+                                    <div class="boss-entry">
+                                        <div class="boss-id">
+                                            <p class="boss-name">Fibonacci</p>
+                                            <span class="boss-title">Father of Western Mathematics</span>
+                                        </div>
+                                        <p class="boss-topics">
+                                            Fibonacci sequence deduction, position indexing, quadratic
+                                            equations, series summations.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-sheet-meta-grid">
+                            <div class="sheet-meta-col">
+                                <p class="sheet-meta-label">Role</p>
+                                <p class="sheet-meta-value">Concept &amp; early Java scaffolding</p>
+                            </div>
+                            <div class="sheet-meta-col">
+                                <p class="sheet-meta-label">Stack</p>
+                                <p class="sheet-meta-value">Java · TypeScript · React 19 · Tailwind CSS · KaTeX</p>
+                            </div>
+                            <div class="sheet-meta-col">
+                                <p class="sheet-meta-label">Year</p>
+                                <p class="sheet-meta-value">2024</p>
+                            </div>
+                        </div>
+
+                        <div class="project-sheet-meta-grid project-sheet-meta-grid--single">
+                            <div class="sheet-meta-col">
+                                <p class="sheet-meta-label">Status</p>
+                                <p class="sheet-meta-value">
+                                    Live on Vercel —
+                                    <a href="https://algebrawl.vercel.app" target="_blank" rel="noopener">algebrawl.vercel.app</a>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ============ BIOGRAPHY ============ -->
+                    <section class="project-section" data-section="biography" data-crumb="Biography" data-sheet-fullscreen="true" hidden data-lenis-prevent>
+                        <p class="project-sheet-meta">Biography · Longform</p>
+                        <figure class="project-sheet-hero">
+                            <img src="attachments/texts/bloom_bruised.png" alt="bloom &amp; bruised">
+                        </figure>
+
+                        <div class="project-body">
+                            <div class="project-body-section">
+                                <canvas id="lotus-bio" class="bio-lotus" tabindex="0" role="button" aria-label="lotus"></canvas>
+                                <p class="project-section-title">00 PROLOGUE</p>
+                                <p class="project-section-desc">
+                                    I was exposed to technology pretty much the day I was born. My dad is a
+                                    computer mechanic, so computers have always just been there. Wires,
+                                    keyboards, random capacitors, fixing things, breaking things, and the
+                                    occasional <em>"don't touch that."</em> So I didn't. And anyway, I was
+                                    way too busy being <span class="accent">that kid</span>. I grew up with a stupid
+                                    amount of self-pressure to study, and just being genuinely curious about
+                                    everything. If there was a club, competition, or activity happening
+                                    somewhere, there was a decent chance I'd try to get involved.
+                                </p>
+                                <p class="project-section-desc">
+                                    I did journalism and was selected to compete in sportswriting, joined
+                                    math quiz bees and placed an award for my school, danced, cheerdance,
+                                    contemporary, and won competitions, played badminton, joined student
+                                    government, every side quest possible.
+                                </p>
+                                <p class="project-section-desc">
+                                    I also picked up the ukulele, then I thought, <em>you know what would
+                                    be even cooler? become a violinist.</em> I liked classical music, but
+                                    the classical music instrument did not like me. I tried, though. Very
+                                    bravely. Very unsuccessfully.
+                                </p>
+                                <p class="project-section-desc">
+                                    I liked being good at things — specially a nerd about math; oh I loved
+                                    Trigonometry. I wanted the knowledge, skills, medals, the certificates,
+                                    the good grades, then so was I a consistent honor student and had
+                                    around four scholarships backing up my high school education.
+                                </p>
+                                <p class="project-section-desc">
+                                    Not the best at everything, but good enough for what I could.
+                                </p>
+                                <p class="project-section-desc">
+                                    <em>And computer was just there, hiding in plain sight, yet.</em> For
+                                    the longest time, my dream was to be an <span class="accent">engineer</span>, without a concept.
+                                </p>
+                            </div>
+
+                            <div class="project-body-section">
+                                <p class="project-section-title">01 SAPARE AUDE</p>
+                                <p class="project-section-desc">
+                                    The very moment before I am about to choose a career, I discovered
+                                    website builders—specifically the mandatory Carrd on K-pop Twitter.
+                                </p>
+                                <p class="project-section-desc">
+                                    I got obsessed with making them look as premium as possible without
+                                    actually having a premium account. I kept running into the free-plan
+                                    limits and, in my infinite wisdom, decided the solution was to make
+                                    more Gmail accounts. I think I made like ten. Okay, maybe not ten. But
+                                    a lot. Eventually I got tired of fighting web builder's limitations
+                                    and thought, <em>fuck it. I'll just learn <span class="accent">web development</span>.</em>
+                                </p>
+                                <p class="project-section-desc">
+                                    So in my senior high school, I picked ICT because I thought, finally,
+                                    I get to <em>really</em> code. But was it <em>really</em> code?
+                                    Apparently, we set up networks, reformatted PCs, and made approximately
+                                    twelve thousand LAN cables.
+                                </p>
+                                <p class="project-section-desc">
+                                    So that wasn't so much fun.
+                                </p>
+                                <p class="project-section-desc">
+                                    And here I told myself that if there was something I wouldn't do the
+                                    way I did before, it would be doing ten things at once. But then I
+                                    became the homeroom president. So coming with it, I ended up being the
+                                    leader of group works, class activities, and school events. That was
+                                    probably my first real experience with <span class="accent">leadership</span>
+                                    — it was quite... an experience. I learned that leadership is not power or a title, it is
+                                    a skill of bringing diversity to function around each other and <em>make
+                                    something beautiful together.</em>
+                                </p>
+                            </div>
+
+                            <div class="project-body-section">
+                                <p class="project-section-title">02 EFFLORECENCE</p>
+                                <p class="project-section-desc">
+                                    Before I graduated from senior high, I got a CHED scholarship, which
+                                    let me enroll at FEU Tech. I took BS <span class="accent">Computer Science</span> with a
+                                    specialization in Software Engineering — a real commitment now,
+                                    except it was towards existential crisis. And crisis I did.
+                                </p>
+                                <p class="project-section-desc">
+                                    My first year humbled me.
+                                </p>
+                                <p class="project-section-desc">
+                                    Coding was a freaking headache. Calculus was not fun. Java had
+                                    approximately seventeen million things happening at once. Variables,
+                                    nested loops, files connecting to other files, more files, and then
+                                    another .java file because apparently one file was not enough.
+                                </p>
+                                <p class="project-section-desc">
+                                    And I was like, <em>oh</em>, I like computer science. No, seriously,
+                                    I liked the logic of Discrete Structures. I liked how straightforward
+                                    assembly is and the simplicity of SQL's syntax. I loved the group
+                                    experiments in physics too. Too, I did not love the two-hour online
+                                    classes that came with the course. C++ and Data Structures from
+                                    earlier year didn't exactly save me from Object Oriented Programming's
+                                    obscurity either, but eventually things started clicking. By the time
+                                    I thought I <em>really like</em> Computer Science, I had to
+                                    drop out of college.
+                                </p>
+                            </div>
+
+                            <div class="project-body-section">
+                                <p class="project-section-title">03 PARANOIA</p>
+                                <p class="project-section-desc">
+                                    I got a job at Cognizant. Which sounds pretty cool when you say
+                                    Cognizant, an AI and technology company and all that. Except I was a
+                                    customer service representative.
+                                </p>
+                                <p class="project-section-desc">
+                                    Everyday, I just wished I was that person installing software on my
+                                    company laptop remotely, typing on notepad to tell me what to do on
+                                    my end; so I didn't particularly like the work. Eventually I was
+                                    jobless again. Then got a 9-to-5 sideline that had basically nothing
+                                    to do with my career path. I hated that one too. Then I was jobless
+                                    again.
+                                </p>
+                                <p class="project-section-desc">
+                                    While I was lost, I wandered outside the realm of physical
+                                    consciousness. <em>Why am I a different font of another Sagittarius
+                                    I know? Why is dating a Gemini Venus like asking for emotional
+                                    whiplash? And what does the numbers in my destiny matrix say about my
+                                    karmic lessons?</em> I meditated to enter soul state and feel the
+                                    universe in my skin, I prayed, and spoke to my spirit.
+                                </p>
+                                <p class="project-section-desc">
+                                    I binged-watch things about quantum theory and levels of
+                                    consciousness, reread The Stranger by Albert Camus to somehow gain a
+                                    new perspective over and over, and sympathize to Osamu Dazai
+                                    despite his prejudice; or maybe I'm just an INFJ, or mostly always
+                                    sitting in between.
+                                </p>
+                                <p class="project-section-desc">
+                                    And somewhere in all that <span class="accent">being lost</span> and <span class="accent">searching</span>, I built a
+                                    foundation in knowing who I am, the power I hold in knowing what I
+                                    want, and the safety in being connected to my <span class="accent">
+                                        body, soul, and spirit</span>.
+                                </p>
+                            </div>
+
+                            <div class="project-body-section">
+                                <p class="project-section-title">04 ALCHEMY</p>
+                                <p class="project-section-desc">
+                                    I found my way back to my table. Although, remembering my passion
+                                    again did not immediately make me productive. Sometimes being in
+                                    front of my PC was about games, sometimes I'm leetcoding in Python.
+                                    After the unspeakable amount of time I spent on games and nothing,
+                                    I figured I was making myself braindead. I had a lot of potential.
+                                    So the <span class="accent">potential</span> I learned.
+                                </p>
+                                <p class="project-section-desc">
+                                    I started a project as a learning ground for backend development and
+                                    database. There comes the birth of Memoir from the cells of PHP,
+                                    MySQL, a lot of JavaScript, and... Blender—the butterfly origami was
+                                    originally made for the letter writing web app. But eventually I had
+                                    to ask myself, <em>"why the hell is there an origami butterfly in a
+                                    letter-writing app?"</em> A postcard just made a lot more sense. People
+                                    write letters. People send postcards. Postcards belong in mail. Case
+                                    closed.
+                                </p>
+                                <p class="project-section-desc">
+                                    Memoir was also partly an excuse to put something on my portfolio.
+                                    And partly an excuse to update my portfolio. And partly because
+                                    apparently I enjoy making websites about the fact that I make
+                                    websites.
+                                </p>
+                            </div>
+
+                            <div class="project-body-section">
+                                <p class="project-section-title">05 SOULSTICE — PRONOIA</p>
+                                <p class="project-section-desc">
+                                    How sweet that I once would only put DNI in my carrd but now I'm
+                                    writing my biography on my own website and pinning my creative works,
+                                    in my own apartment in a brandnew city.
+                                </p>
+                                <p class="project-section-desc">
+                                    I used to think the detours meant I was falling behind. The
+                                    unfinished degree. The jobs I didn't want. The things I started and
+                                    abandoned. The months where I played games and wondered what the hell
+                                    I was doing. The strange spiritual rabbit holes. The hours spent
+                                    trying to understand myself through astrology, consciousness,
+                                    mathematics, and everything else I could find.
+                                </p>
+                                <p class="project-section-desc">
+                                    Maybe that was also the origin story of Memoir — that a story only
+                                    makes sense after being written. <em>A flower is lovelier when it's
+                                    grown from a seed someone planted without knowing if it would
+                                    bloom.</em>
+                                </p>
+                                <p class="project-section-desc">
+                                    I've been bruised by a lot storms. I've lost some petals. I've grown
+                                    in weird directions. I've had seasons where I thought absolutely
+                                    nothing was happening, and then somehow <span class="accent">something grew anyway</span>—a
+                                    dream, a project, a concept, a new obsession, a question, and the
+                                    imagination of the infinite of things to discover.
+                                </p>
+                                <p class="project-section-desc">
+                                    For now, I'm here —<span class="accent">still in the making</span>, eternally.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </article>
+        </div>
+
+        <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+            }
+        }
+        </script>
+        <script src="script.js"></script>
+        <script src="addons/mesh-bg.js"></script>
+        <script type="module" src="addons/terminal.js?v=2"></script>
+        <script src="addons/butterfly-curve.js"></script>
+        <script src="addons/trail.js" defer></script>
+        <script src="addons/lotus.js" defer></script>
+        <script type="module" src="addons/art-butterfly.js"></script>
+    </body>
+</html>
