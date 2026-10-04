@@ -391,6 +391,7 @@
     .shelf-spotlight { display: none; }
 
     .sidebar-label { margin-top: 1.5rem; }
+    .sidebar-footer .sidebar-label { margin-top: 0; margin-bottom: 0.3rem; }
     .sub-nav { display: none; }
 
     .sidebar-logo {
@@ -405,6 +406,7 @@
     .sidebar .hero-subtitle { margin: -0.4rem 0 0 0.35rem; font-size: 1.4rem; }
     .sidebar .nav-item > a { padding: 0.14rem 0; }
 
+    .sidebar-social { gap: 0.25rem; }
     .sidebar-social a {
         display: grid;
         place-items: center;

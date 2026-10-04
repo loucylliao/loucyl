@@ -1,6 +1,6 @@
 # Loucyl Liao — Portfolio
 
-> [![STEP INSIDE](https://img.shields.io/badge/%E2%9D%A4_STEP_INSIDE-d0afc0?style=for-the-badge&labelColor=d0afc0&color=d0afc0)](https://loucylliao.github.io/loucyl/)
+> [![STEP INSIDE](https://img.shields.io/badge/%E2%9D%A4_STEP_INSIDE-d0afc0?style=for-the-badge&labelColor=d0afc0&color=d0afc0)](https://loucyl.space/)
 
   My personal portfolio and a little corner of the internet where I leave the
 things I make, the things I'm learning, and the ideas that would otherwise

@@ -1266,7 +1266,7 @@ img, canvas, svg, video {
     .sidebar-social {
         display: flex;
         grid-template-columns: repeat(4, 1fr);
-        gap: 0.8rem;
+        gap: 0.6rem;
         margin-left: 0.5rem;
         margin-top: -0.5rem;
     }
