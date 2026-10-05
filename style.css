@@ -528,9 +528,6 @@ img, canvas, svg, video {
     letter-spacing: 0.04em;
 }
 
-.project-section[data-section="syzygia"] > .project-body { gap: 0; }
-.project-section[data-section="syzygia"] .project-body-section:first-child { margin-bottom: 0; }
-
 /* =========================================
    TERMINAL DEMO
    ========================================= */
@@ -1618,7 +1615,7 @@ img, canvas, svg, video {
     display: block;
     width: max-content;
     margin-top: -1rem;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.8rem;
 }
 
 .project-sheet-close {
@@ -1718,6 +1715,8 @@ img, canvas, svg, video {
     opacity: 1;
     margin-bottom: 0.75rem;
 }
+
+.project-section[data-section="syzygia"] > .project-sheet-meta { margin-top: 1rem; }
 
 .project-sheet-meta .accent { font-weight: 550; font-family: var(--font-mono); font-size: 0.8rem; }
 

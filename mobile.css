@@ -665,6 +665,7 @@
     }
     .project-sheet-scroll { padding: 1rem 1.1rem 2.5rem; }
     .project-sheet-crumb { font-size: 0.66rem; }
+    .project-sheet .project-sheet-meta { font-size: 0.66rem; }
 
     .project-sheet-meta-grid {
         grid-template-columns: 1fr 1fr;
@@ -685,9 +686,6 @@
     }
     .project-sheet--fullscreen .project-sheet-bar { top: 0.75rem; padding: 0 0.9rem; }
     .project-sheet--fullscreen .project-sheet-title { font-size: 1.5rem; }
-
-    .project-section[data-section="syzygia"] > .project-body { gap: 0.5rem; }
-    .project-section[data-section="syzygia"] .project-body-section:first-child { margin-bottom: 2rem; }
 
     .project-section[data-section="biography"] .project-body-section + .project-body-section {
         margin-top: 3rem;
