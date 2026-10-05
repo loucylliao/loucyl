@@ -435,6 +435,12 @@ img, canvas, svg, video {
 
 .project-row:first-child { border-top: 1px solid var(--guide); }
 
+.project-row--developing {
+    grid-template-columns: minmax(0, 1fr);
+}
+.project-row--developing .project-body { padding-left: 0.5rem; }
+.project-row--developing .project-desc { max-width: none; }
+
 .project-thumb {
     width: 218px;
     aspect-ratio: 16 / 10;
@@ -466,6 +472,13 @@ img, canvas, svg, video {
     gap: 1rem;
 }
 
+.project-title-group {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+}
+
 .project-name {
     font-family: var(--font-serif);
     font-style: italic;
@@ -479,6 +492,17 @@ img, canvas, svg, video {
     font-size: 0.71rem;
     color: var(--color-muted);
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.project-status {
+    padding: 0.18rem 0.42rem;
+    border: 1px solid var(--guide);
+    border-radius: 999px;
+    color: var(--color-accent);
+    font-size: 0.58rem;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
     white-space: nowrap;
 }
 
@@ -503,6 +527,9 @@ img, canvas, svg, video {
     color: var(--color-muted);
     letter-spacing: 0.04em;
 }
+
+.project-section[data-section="syzygia"] > .project-body { gap: 0; }
+.project-section[data-section="syzygia"] .project-body-section:first-child { margin-bottom: 0; }
 
 /* =========================================
    TERMINAL DEMO
@@ -1587,6 +1614,12 @@ img, canvas, svg, video {
 .project-sheet-crumb .crumb-name { font-family: var(--font-serif); color: var(--color-text); font-size: 0.9rem; }
 .project-sheet-crumb .crumb-sep  { opacity: 0.5; }
 .project-sheet-crumb .crumb-project { color: var(--color-text); }
+.project-sheet-status {
+    display: block;
+    width: max-content;
+    margin-top: -1rem;
+    margin-bottom: 1.25rem;
+}
 
 .project-sheet-close {
     display: inline-flex;

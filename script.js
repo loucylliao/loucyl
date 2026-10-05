@@ -325,6 +325,7 @@ if (artScene && "IntersectionObserver" in window) {
 (function () {
     const sheet     = document.getElementById('project-sheet');
     const crumb     = document.getElementById('project-sheet-crumb');
+    const crumbStatus = document.getElementById('project-sheet-status');
     const bannerFig = document.getElementById('project-sheet-banner-figure');
     const bannerImg = document.getElementById('project-sheet-banner');
     const bannerIfr = document.getElementById('project-sheet-iframe');
@@ -547,7 +548,7 @@ if (artScene && "IntersectionObserver" in window) {
             s.hidden = s.dataset.section !== id;
         });
 
-        if (sandbox) sandbox.hidden = isBiography;
+        if (sandbox) sandbox.hidden = isBiography || !banner;
 
         if (isBiography) {
             if (!bioProgress) bioProgress = buildBioProgress();
@@ -587,6 +588,7 @@ if (artScene && "IntersectionObserver" in window) {
                 || visibleSection.dataset.section
                 || '';
         }
+        if (crumbStatus) crumbStatus.hidden = id !== 'syzygia';
 
         sheet.hidden = false;
         document.body.classList.add('project-sheet-open');
@@ -968,6 +970,7 @@ const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
+    smoothTouch: true,
 });
 
 function raf(time) {

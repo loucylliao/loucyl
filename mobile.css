@@ -478,9 +478,23 @@
     }
     .project-row:first-child { border-top: 1px solid var(--guide); }
     .project-thumb { grid-area: thumb; width: 100%; max-width: none; }
+    .project-row--developing {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "head"
+            "kind"
+            "desc"
+            "tags";
+    }
+    .project-row--developing .project-head,
+    .project-row--developing .project-kind,
+    .project-row--developing .project-desc,
+    .project-row--developing .project-tags { margin-left: 0.1rem; }
     .project-body { display: contents; }
     .project-head { grid-area: head; min-width: 0; }
     .project-name { font-size: clamp(0.9rem, 4vw, 1.1rem); }
+    .project-title-group { gap: 0.35rem; }
+    .project-status { font-size: 0.52rem; padding: 0.14rem 0.32rem; }
     .project-year-end { font-size: 0.6rem; }
     .project-kind { grid-area: kind; font-size: 0.66rem; line-height: 1.35; }
     .project-desc { grid-area: desc; font-size: 0.71rem; line-height: 1.4; }
@@ -671,6 +685,9 @@
     }
     .project-sheet--fullscreen .project-sheet-bar { top: 0.75rem; padding: 0 0.9rem; }
     .project-sheet--fullscreen .project-sheet-title { font-size: 1.5rem; }
+
+    .project-section[data-section="syzygia"] > .project-body { gap: 0.5rem; }
+    .project-section[data-section="syzygia"] .project-body-section:first-child { margin-bottom: 2rem; }
 
     .project-section[data-section="biography"] .project-body-section + .project-body-section {
         margin-top: 3rem;
