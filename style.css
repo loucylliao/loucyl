@@ -1,6 +1,4 @@
-/* =========================================
-   VARIABLES & RESET
-   ========================================= */
+
 
 :root {
     --color-bg: #202020;
@@ -46,9 +44,7 @@ img, canvas, svg, video {
     -webkit-user-drag: none;
 }
 
-/* =========================================
-   ASCII ANIMATION BANNER
-   ========================================= */
+
 
 .ascii-banner {
     width: 100%;
@@ -79,9 +75,7 @@ img, canvas, svg, video {
     #ascii-animation { font-size: 12px; }
 }
 
-/* =========================================
-   NAV / TYPOGRAPHY
-   ========================================= */
+
 
 .main-nav { margin-bottom: 4rem; }
 
@@ -184,9 +178,7 @@ img, canvas, svg, video {
 
 .sidebar { display: none; }
 
-/* =========================================
-   CLOSER BIO
-   ========================================= */
+
 
 .bio-closer {
     color: var(--color-muted);
@@ -220,9 +212,7 @@ img, canvas, svg, video {
     outline: none;
 }
 
-/* =========================================
-   ABOUT
-   ========================================= */
+
 
 .about {
     display: grid;
@@ -269,9 +259,7 @@ img, canvas, svg, video {
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
 }
 
-/* =========================================
-   ASCII BUTTERFLY
-   ========================================= */
+
 
 .ascii-butterfly {
     position: absolute;
@@ -287,9 +275,7 @@ img, canvas, svg, video {
     left: 5%;
 }
 
-/* =========================================
-   ABOUT: RIGHT COLUMN
-   ========================================= */
+
 
 .about-right {
     display: flex;
@@ -328,9 +314,7 @@ img, canvas, svg, video {
     .about-right { grid-column: 1; }
 }
 
-/* =========================================
-   TREE
-   ========================================= */
+
 
 .tree,
 .tree ul {
@@ -376,9 +360,7 @@ img, canvas, svg, video {
 
 .tree-label { display: block; padding: 4px 0; line-height: 1.4; }
 
-/* =========================================
-   PROJECTS
-   ========================================= */
+
 
 .projects .section-title { margin-top: 5.5rem; margin-bottom: 1.5rem; }
 .projects .hero-subtitle { position: relative; margin-bottom: -5rem; z-index: 2; }
@@ -411,9 +393,7 @@ img, canvas, svg, video {
     color: var(--color-text);
 }
 
-/* =========================================
-   PROJECT LIST
-   ========================================= */
+
 
 .project-list {
     list-style: none;
@@ -528,9 +508,7 @@ img, canvas, svg, video {
     letter-spacing: 0.04em;
 }
 
-/* =========================================
-   TERMINAL DEMO
-   ========================================= */
+
 
 .terminal-subtitle {
     font-family: var(--font-serif);
@@ -644,9 +622,7 @@ img, canvas, svg, video {
 
 .terminal-in::selection { background: rgba(208, 175, 192, 0.3); }
 
-/* =========================================
-   ART GALLERY
-   ========================================= */
+
 
 .art-section { margin-top: 4.75rem; }
 
@@ -724,9 +700,7 @@ img, canvas, svg, video {
 
 .art-item-butterfly { display: flex; flex-direction: column; gap: 0; }
 
-/* =========================================
-   ART — BUTTERFLY
-   ========================================= */
+
 
 #butterfly-curve {
     width: 100%;
@@ -784,7 +758,7 @@ img, canvas, svg, video {
 .art-butterfly-hybrid.mode-interactive { cursor: grabbing; }
 .art-butterfly-hybrid.mode-interactive { touch-action: none; }
 
-/* HINTS */
+
 .hint {
     --hint-size: 60px;
     --hint-line: 170px;
@@ -889,9 +863,7 @@ img, canvas, svg, video {
     transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
-/* =========================================
-   MORE STUFFS
-   ========================================= */
+
 
 .more_stuffs .section-title { margin-top: 6.5rem; margin-bottom: 6.3rem; }
 
@@ -926,9 +898,7 @@ img, canvas, svg, video {
     mix-blend-mode: screen;
 }
 
-/* =========================================
-   BOOKSHELF
-   ========================================= */
+
 
 .more_stuffs .terminal-subtitle {
     position: relative;
@@ -1067,7 +1037,7 @@ img, canvas, svg, video {
 .book.is-front .book-spine { opacity: 0; }
 .book.is-front .book-cover { object-fit: cover; opacity: 1; transition: opacity .3s ease .3s; }
 
-/* Per-book tweaks */
+
 .book-alchemised       { --book-height: 205px; --book-width: 30px; --book-spine-width: 28px; --book-front-width: 136px; --spine: #2c302e; --spine-ink: #d1c5b4; }
 .book-homebody         { --book-height: 195px; --book-width: 24px; --book-front-width: 130px; --spine: #c98862; --spine-ink: #3a2e20; }
 .book-ineverpromised   { --book-height: 190px; --book-width: 26px; --book-front-width: 128px; --spine: #021222; --spine-ink: #cac6ca; --book-title-size: 8px; }
@@ -1080,9 +1050,7 @@ img, canvas, svg, video {
 .book-lookingforalaska { --book-height: 195px; --book-width: 30px; --book-front-width: 130px; --spine: #101010; --spine-ink: #e8e0d0; --book-title-size: 8.5px; }
 .book-lookingforalaska .book-cover { filter: none; }
 
-/* =========================================
-   FOOTER
-   ========================================= */
+
 
 .site-footer {
     max-width: var(--shell-max);
@@ -1221,9 +1189,7 @@ img, canvas, svg, video {
 
 .footer-list a:hover .footer-arrow { opacity: 1; color: var(--color-accent); }
 
-/* =========================================
-   DESKTOP LAYOUT
-   ========================================= */
+
 
 @media (min-width: 1024px) {
     body { padding: 0; }
@@ -1374,9 +1340,7 @@ img, canvas, svg, video {
     .sidebar { gap: 1rem; }
 }
 
-/* =========================================
-   SIDEBAR — SUB NAV
-   ========================================= */
+
 
 .nav-item { position: relative; }
 
@@ -1425,9 +1389,7 @@ img, canvas, svg, video {
 .nav-item.is-active .sub-nav > li:nth-child(4) { transition-delay: 0.28s; }
 
 .sub-nav > li:hover { color: var(--color-accent); opacity: 1; }
-/* =========================================
-   PAGE LOAD ANIMATIONS
-   ========================================= */
+
 
 @keyframes ease-up {
     from { opacity: 0; transform: translateY(28px); }
@@ -1481,9 +1443,7 @@ img, canvas, svg, video {
     .sidebar-footer { animation: none; }
 }
 
-/* =========================================
-   POPUP SHEET
-   ========================================= */
+
 
 .project-row { cursor: pointer; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
 .project-row:hover,
@@ -1809,9 +1769,7 @@ html.sheet-scroll-lock .project-sheet-scroll { touch-action: pan-y; }
 .project-sheet-scrim,
 .project-sheet-bar { touch-action: none; }
 
-/* =========================================
-   PROJECT SHEET — ALGEBRAWL
-   ========================================= */
+
 
 .project-sheet-meta-grid {
     display: grid;
@@ -1892,9 +1850,7 @@ html.sheet-scroll-lock .project-sheet-scroll { touch-action: pan-y; }
     opacity: 0.9;
 }
 
-/* =========================================
-   TERMINAL MODAL
-   ========================================= */
+
 
 .terminal-modal {
     position: fixed;
@@ -1985,9 +1941,7 @@ html.sheet-scroll-lock .project-sheet-scroll { touch-action: pan-y; }
 
 body.terminal-modal-open { overflow: hidden; }
 
-/* =========================================
-   FLOATING CURSOR
-   ========================================= */
+
 .terminal--preview { position: relative; }
 
 .cursor-field {
@@ -2034,9 +1988,7 @@ body.terminal-modal-open { overflow: hidden; }
     white-space: nowrap;
 }
 
-/* =========================================
-   FONTS
-   ========================================= */
+
 
 @font-face {
     font-family: "Instrument Serif";
@@ -2052,17 +2004,13 @@ body.terminal-modal-open { overflow: hidden; }
     font-display: swap;
 }
 
-/* =========================================
-   HIDE MOBILE TOPBAR
-   ========================================= */
+
 
 .mobile-header,
 .sidebar-scrim,
 .sidebar-close { display: none; }
 
-/* =========================================
-   COMPENDIUM — TRIANGLE LIGHT
-   ========================================= */
+
 
 .shelf-spotlight {
     position: absolute;
@@ -2160,9 +2108,7 @@ body.terminal-modal-open { overflow: hidden; }
     .shelf-spotlight.is-lit { opacity: 1; animation: none; }
 }
 
-/* =========================================
-   PROFILE — HER BUTTON
-   ========================================= */
+
 
 .her-button {
     position: absolute;
@@ -2188,9 +2134,7 @@ body.terminal-modal-open { overflow: hidden; }
     color: var(--color-text);
 }
 
-/* =========================================
-   PROJECT SHEET — FULLSCREEN MODE
-   ========================================= */
+
 
 .project-sheet--fullscreen {
     --fs-page-w: min(48rem, 100%);
@@ -2309,9 +2253,7 @@ body.terminal-modal-open { overflow: hidden; }
     border-radius: 4px;
 }
 
-/* =========================================
-   PROJECT SHEET — FULL SCREEN TOGGLE BUTTON
-   ========================================= */
+
 
 .project-sheet-actions {
     display: inline-flex;
@@ -2392,9 +2334,7 @@ body.sheet-fullscreen::-webkit-scrollbar {
     body.sheet-fullscreen .sidebar { transition-duration: 0.01s; }
 }
 
-/* =========================================
-   PROJECT SHEET — HERO TITLE IMAGE
-   ========================================= */
+
 
 .project-sheet-hero {
     margin-top: 4rem;
@@ -2418,9 +2358,7 @@ body.sheet-fullscreen::-webkit-scrollbar {
 
 .project-sheet--fullscreen .project-sheet-hero img { width: 31.5rem; }
 
-/* =========================================
-   BIOGRAPHY — LOTUS
-   ========================================= */
+
 
 .bio-lotus {
     display: block;
@@ -2455,9 +2393,7 @@ body.sheet-fullscreen::-webkit-scrollbar {
     mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
 }
 
-/* =========================================
-   NAV SPOTLIGHT
-   ========================================= */
+
 
 .nav-spotlight-layer { display: none; }
 
@@ -2523,9 +2459,7 @@ body.sheet-fullscreen::-webkit-scrollbar {
     .nav-spotlight::before { transition: opacity 0.3s ease !important; animation: none !important; }
 }
 
-/* =========================================
-   FULLSCREEN BIOGRAPHY
-   ========================================= */
+
 
 .sheet-progress {
     position: absolute;
@@ -2549,9 +2483,7 @@ body.sheet-fullscreen::-webkit-scrollbar {
     will-change: transform;
 }
 
-/* =========================================
-   BIOGRAPHY — SECTION INDICATOR
-   ========================================= */
+
 
 .bio-progress {
     display: none;
@@ -2622,9 +2554,7 @@ body.sheet-fullscreen::-webkit-scrollbar {
     transition: transform 0.15s linear;
 }
 
-/* =========================================
-   ENTERING FULL SCREEN
-   ========================================= */
+
 
 .project-sheet.is-fs-leaving .project-sheet-panel {
     animation: project-sheet-out 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -2661,9 +2591,7 @@ body.sheet-fullscreen::-webkit-scrollbar {
     .project-sheet--fullscreen.is-fs-entering .bio-progress { animation: none; }
 }
 
-/* =========================================
-   MAIN PAGE SCROLLBAR
-   ========================================= */
+
 
 html,
 body {
@@ -2712,9 +2640,7 @@ body.sheet-fullscreen::-webkit-scrollbar {
     display: block !important;
 }
 
-/* =========================================
-   MAIN PAGE PROGRESS BAR
-   ========================================= */
+
 
 .page-progress {
     display: none;

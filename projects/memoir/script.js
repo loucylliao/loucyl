@@ -1,23 +1,21 @@
 import * as THREE from "https://unpkg.com/three@0.170.0/build/three.module.js";
 import { OBJLoader } from "https://unpkg.com/three@0.170.0/examples/jsm/loaders/OBJLoader.js";
 
-/* ==========================================================================
- * OPENING SCENE (three.js postcard)
- * ======================================================================== */
+
 
 const openingScene = document.getElementById("opening-scene");
 const postcardCanvas = document.getElementById("postcard-canvas");
 const typingElement = document.getElementById("opening-typing");
 
-// Put postcard.obj and both postcard images in the same folder, or change this path.
+
 const modelPath = "logo/postcard.obj";
 
-// The MTL file has C:/ paths that won't work on a website, so the images are
-// attached here by material name.
+
+
 const envelopeTextures = {
-  "Material.001": "logo/postcard_pink_back.png",   // back panel (writing side)
-  "Material.002": "logo/postcard_pink_front.png",  // front panel (plain paper)
-  "Material.004": "logo/postcard_pink_front.png",  // flap
+  "Material.001": "logo/postcard_pink_back.png",   
+  "Material.002": "logo/postcard_pink_front.png",  
+  "Material.004": "logo/postcard_pink_front.png",  
 };
 
 function startOpeningScene() {
@@ -354,9 +352,7 @@ function startOpeningScene() {
 
 startOpeningScene();
 
-/* ==========================================================================
- * TYPING TAGLINE
- * ======================================================================== */
+
 
 const taglineElement = document.getElementById("tagline-text");
 
@@ -422,9 +418,7 @@ if (openingScene) {
   }
 }
 
-/* ==========================================================================
- * MOBILE HAMBURGER MENU
- * ======================================================================== */
+
 
 const menuTrigger = document.getElementById("menu-trigger");
 const mobileMenu = document.getElementById("mobile-menu");
@@ -439,21 +433,19 @@ menuTrigger?.addEventListener("click", () => {
   menuTrigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
 });
 
-// Tap outside the menu closes it.
+
 document.addEventListener("click", (event) => {
   if (!mobileMenu?.classList.contains("open")) return;
   if (mobileMenu.contains(event.target) || menuTrigger.contains(event.target)) return;
   closeMobileMenu();
 });
 
-/* ==========================================================================
- * NAV ACTIONS (delegated)
- * ======================================================================== */
+
 
 document.addEventListener("click", (event) => {
   const t = event.target;
 
-  // Static preview: "write something to keep" just glides down to the how-it-works section.
+  
   if (t.closest(".write-button")) {
     event.preventDefault();
     closeMobileMenu();
@@ -476,9 +468,7 @@ document.addEventListener("click", (event) => {
   }
 });
 
-/* ==========================================================================
- * MOBILE ONLY: PAGE-ONE COVER
- * ======================================================================== */
+
 
 const pageOneSection = document.getElementById("page-one");
 const pageOneCover = document.getElementById("page-one-cover");
@@ -503,9 +493,7 @@ if (pageOneSection && "ResizeObserver" in window) {
 
 syncPageOneCover();
 
-/* ==========================================================================
- * PAGE TWO: WRITE FLOW
- * ======================================================================== */
+
 
 const writeFields = document.querySelectorAll(".write-field");
 const writeDescriptions = document.querySelectorAll(".write-description");
@@ -628,9 +616,7 @@ if (pageTwo && pageOneSection && "IntersectionObserver" in window) {
   pageOneExitObserver.observe(pageOneSection);
 }
 
-/* ==========================================================================
- * PAGE THREE: reveal the origin story as it scrolls into view
- * ======================================================================== */
+
 
 if (pageThreeSection && "IntersectionObserver" in window) {
   const pageThreeRevealObserver = new IntersectionObserver(

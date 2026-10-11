@@ -1,4 +1,4 @@
-/* THE TEXT COLOUR: every piece of text on the site uses this one colour. Change it here. */
+
 :root {
     --text: #6b5455;
     --ink: currentColor;
@@ -43,7 +43,7 @@ body.is-scrollable {
     border: 0;
 }
 
-/* OPENING SCENE LAYER */
+
 
 .opening-scene {
     position: fixed;
@@ -84,7 +84,7 @@ body.is-scrollable {
     white-space: nowrap;
 }
 
-/* FONTS */
+
 
 .title {
     font-family: "Beth Ellen", sans-serif;
@@ -98,7 +98,7 @@ body.is-scrollable {
     height: auto;
 }
 
-/* TOP BAR + NAV LINKS */
+
 
 .topbar {
     position: fixed;
@@ -159,14 +159,14 @@ body.is-scrollable {
     text-transform: uppercase;
 }
 
-/* MOBILE ONLY: hamburger on the right of the top bar */
+
 .topbar-mobile-controls {
     display: none;
     align-items: center;
     gap: 12px;
 }
 
-/* MOBILE HAMBURGER + DROPDOWN MENU */
+
 .menu-trigger {
     display: none;
     flex-direction: column;
@@ -230,12 +230,12 @@ body.is-scrollable {
     background: rgba(87, 63, 63, 0.25);
 }
 
-/* PAGE CONTENT */
+
 
 .page {
     position: relative;
     z-index: 1;
-    flex: 1 0 auto; /* fills whatever height is left, pushing the footer down */
+    flex: 1 0 auto; 
 }
 
 .hero {
@@ -244,7 +244,7 @@ body.is-scrollable {
     height: 70vh;
 }
 
-/* MOBILE ONLY cover (hidden on desktop, shown in the mobile media query below) */
+
 .page-one-cover { display: none; }
 
 .page-section {
@@ -271,7 +271,7 @@ body.is-scrollable {
 }
 .page-three-bg { background: #e4e0d5; }
 
-/* TYPING TAGLINE (left side, desktop) */
+
 
 .tagline {
     position: absolute;
@@ -311,7 +311,7 @@ body.is-scrollable {
     50% { opacity: 0; }
 }
 
-/* THE POSTAGE STAMP (desktop only — hidden on mobile, see media query) */
+
 .stamp-holder {
     position: absolute;
     left: calc(9vw - 20px);
@@ -331,7 +331,7 @@ body.is-scrollable {
     transform-origin: bottom left;
 }
 
-/* WRITE BUTTON + PARAGRAPH */
+
 .hero-cta {
     position: absolute;
     left: 8vw;
@@ -385,14 +385,14 @@ body.is-scrollable {
     opacity: 1;
 }
 
-/* ---- phones ---- */
+
 
 @media (max-width: 700px) {
     .topbar-nav { display: none; }
     .topbar-mobile-controls { display: flex; }
     .menu-trigger { display: flex; }
 
-    /* the stamp is hidden on mobile per the reference layout */
+    
     .stamp-holder { display: none; }
 
     .hero {
@@ -402,9 +402,7 @@ body.is-scrollable {
         padding: 130px 28px 50px;
     }
 
-    /* the cover: lives inside .opening-scene (above the postcard + bottom label, below "dear,").
-       script.js sets --page-one-height to page one's height and slides the cover up as you scroll,
-       so it only covers page one and the postcard is revealed at page two */
+    
     .page-one-cover {
         display: block;
         position: absolute;
@@ -417,11 +415,10 @@ body.is-scrollable {
         pointer-events: none;
     }
 
-    /* keeps the page-one background and the page-two image lined up
-       when page one is taller than the screen */
+    
     .page-one-bg { height: var(--page-one-height, 100vh); }
 
-    /* static again: relative positioning applied the desktop left/top offsets and pushed the text off screen */
+    
     .tagline, .hero-cta {
         position: static;
         transform: none;
@@ -430,8 +427,7 @@ body.is-scrollable {
         margin: 0 auto;
     }
 
-    /* fixed-height box: reserves the same space regardless of which tagline sentence is showing,
-       so the button and paragraph below never shift up or down as the text types/erases */
+    
     .tagline {
         height: calc(var(--tagline-size) * 1.25 * 2);
         overflow: hidden;
@@ -443,12 +439,12 @@ body.is-scrollable {
     .hero-cta { margin-top: 5px; }
     .write-button { margin-bottom: 9px; }
 
-    /* moved further down from the button, independent of tagline length */
+    
     .hero-paragraph { font-size: 12px; margin: 22px auto 0; padding: 0 10px; text-align: center; }
 
     .topbar { padding: 16px; }
 
-    /* top bar fonts */
+    
     .topbar .title { font-size: 22px; }
     .mobile-menu-link { font-size: 12px; }
     .opening-typing { font-size: 16px; }
@@ -462,9 +458,7 @@ body.is-scrollable {
     .tagline-text::after { animation: none; }
 }
 
-/* ==========================================================================
-   PAGE TWO — WRITE FLOW
-   ========================================================================== */
+
 
 #page-two {
     display: flex;
@@ -587,7 +581,7 @@ body.is-scrollable {
 .write-nav {
     position: absolute;
     left: 80px;
-    top: 0; /* set dynamically by script.js */
+    top: 0; 
     display: flex;
     align-items: center;
     gap: 20px;
@@ -614,7 +608,7 @@ body.is-scrollable {
     color: #fde7eacc;
 }
 
-/* PHOTO STACK */
+
 
 .postcard-stack {
     position: relative;
@@ -638,12 +632,12 @@ body.is-scrollable {
     border-radius: 1px;
 }
 
-/* z-index reversed: green sits on top, blue in the middle, purple on the bottom */
+
 .stack-green  { --rot: -4deg; z-index: 3; }
 .stack-blue   { --rot: 3deg;  z-index: 2; transform: translate(calc(60vw + 14px), 50px) rotate(3deg); }
 .stack-purple { --rot: -2deg; z-index: 1; transform: translate(calc(60vw - 14px), 50px) rotate(-2deg); }
 
-/* all three photos arrive together as soon as page two scrolls into view */
+
 #page-two.in-view .stack-green {
     opacity: 1;
     transform: translateY(0) rotate(var(--rot));
@@ -659,13 +653,12 @@ body.is-scrollable {
     transform: translateY(25px) rotate(-2deg) translateX(-10px);
 }
 
-/* while step 3 is active, rotate the purple card upright so the letter reads normally */
+
 #page-two.step-3 .stack-purple {
     transform: translateY(25px) rotate(92deg) translateX(-10px);
 }
 
-/* stepping through the write flow peels a card off the top of the stack:
-   step 2 removes green, step 3 removes blue, step 4 removes purple */
+
 #page-two.step-2 .stack-green,
 #page-two.step-3 .stack-green,
 #page-two.step-4 .stack-green {
@@ -684,9 +677,7 @@ body.is-scrollable {
     transform: translate(calc(60vw - 10px), 64px) rotate(-2deg);
 }
 
-/* forces every card back to its off-screen "closed" position when the user
-   has scrolled well into page three — wins over the .in-view / .step-* rules
-   above purely by coming later in the file, same specificity */
+
 #page-two.exiting .stack-green {
     opacity: 0;
     transform: translate(60vw, 30px) rotate(var(--rot));
@@ -720,15 +711,13 @@ body.is-scrollable {
     .write-nav { margin-left: 0; }
 }
 
-/* ==========================================================================
-   PAGE THREE — ABOUT
-   ========================================================================== */
+
 
 #page-three {
     display: flex;
     align-items: center;
-    min-height: 100vh;   /* still feels like a full "page" */
-    height: auto;        /* grows with content instead of being locked */
+    min-height: 100vh;   
+    height: auto;        
     padding: 47vh 8vw 9vh;
     box-sizing: border-box;
     scroll-margin-top: 80px;
@@ -780,7 +769,7 @@ body.is-scrollable {
     margin-top: 0px;
 }
 
-/* fade each piece in, staggered, once the section scrolls into view */
+
 #page-three .reveal {
     opacity: 0;
     transform: translateY(18px);
@@ -801,7 +790,7 @@ body.is-scrollable {
     transform: translateY(-4px);
     pointer-events: none;
 
-    /* paint the text colour through the scribble's shape */
+    
     background-color: var(--text);
     -webkit-mask-image: url("logo/scribble.gif");
     mask-image: url("logo/scribble.gif");
@@ -813,7 +802,7 @@ body.is-scrollable {
     mask-size: contain;
 }
 
-/* stagger order: title, then each paragraph, then signoff, then button */
+
 #page-three.in-view .page-three-title                { transition-delay: 0s;    }
 #page-three.in-view .page-three-body p:nth-child(1)  { transition-delay: 0.15s; }
 #page-three.in-view .page-three-body p:nth-child(2)  { transition-delay: 0.30s; }
@@ -823,7 +812,7 @@ body.is-scrollable {
 #page-three.in-view .page-three-signoff              { transition-delay: 0.90s; }
 #page-three.in-view .page-three-cta                  { transition-delay: 1.05s; }
 
-/* ---- phones ---- */
+
 
 @media (max-width: 700px) {
     #page-three {
@@ -842,9 +831,7 @@ body.is-scrollable {
     #page-three .reveal { opacity: 1; transform: none; transition: none; }
 }
 
-/* ==========================================================================
-   SITE FOOTER
-   ========================================================================== */
+
 
 .site-footer {
     display: flex;
@@ -876,7 +863,7 @@ body.is-scrollable {
     opacity: 0.5;
 }
 
-/* pushes contact/privacy to the right on wide screens */
+
 .site-footer-spacer {
     flex: 1;
 }

@@ -30,7 +30,7 @@
     };
 
     const css = getComputedStyle(document.documentElement);
-    const accent = css.getPropertyValue("--color-accent").trim() || "#d0afc0";
+    const accent = css.getPropertyValue("--color-accent-fill").trim() || "#d0afc0";
     const COLORS = [accent, accent, accent, "#e9cfdb", "#c79bb1"];
 
     const canvas = document.createElement("canvas");
@@ -204,7 +204,7 @@
 
             ctx.save();
             ctx.globalAlpha = fade * twinkle * CFG.dotAlpha;
-            ctx.fillStyle = "#f6e6ee";
+            ctx.fillStyle = document.documentElement.getAttribute("data-theme") === "light" ? "#b47f9a" : "#f6e6ee";
             ctx.shadowColor = accent;
             ctx.shadowBlur = CFG.dotGlow;
             ctx.beginPath();

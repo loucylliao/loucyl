@@ -36,7 +36,8 @@
             ox = w / 2 - ((minX + maxX) / 2) * scale;
             oy = h / 2 - ((minY + maxY) / 2) * scale;
             ctx.lineWidth = lineWidth;
-            ctx.strokeStyle = `rgba(208, 175, 192, ${alpha})`;
+            const rgb = getComputedStyle(document.documentElement).getPropertyValue("--curve-rgb").trim() || "208, 175, 192";
+            ctx.strokeStyle = `rgba(${rgb}, ${alpha})`;
             ctx.lineJoin = "round";
             return true;
         }
@@ -133,6 +134,7 @@
         if (!animate) {
             drawAll();
             window.addEventListener("resize", drawAll);
+            window.addEventListener("themechange", drawAll);
             return;
         }
 
@@ -150,6 +152,11 @@
         canvas.addEventListener("click", play);
 
         window.addEventListener("resize", () => {
+            if (!resize()) return;
+            drawProgress();
+        });
+
+        window.addEventListener("themechange", () => {
             if (!resize()) return;
             drawProgress();
         });

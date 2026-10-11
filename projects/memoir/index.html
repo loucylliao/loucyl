@@ -6,7 +6,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- preload so mobile connections start fetching the fonts before the CSS is even parsed -->
+
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Beth+Ellen&family=Geist+Mono:wght@400&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Beth+Ellen&family=Geist+Mono:wght@400&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
@@ -26,22 +26,19 @@
 
 <div class="opening-scene" id="opening-scene" aria-hidden="true">
     <canvas id="postcard-canvas"></canvas>
-    <!-- MOBILE ONLY: solid page-one colour over the postcard + label. Scrolled with the page by script.js.
-         Must stay above the canvas/label and below the "dear," typing. -->
+     MOBILE ONLY: solid page-one colour over the postcard + label. Scrolled with the page by script.js.
+
     <div class="page-one-cover" id="page-one-cover"></div>
     <p class="opening-typing" id="opening-typing" aria-hidden="true"></p>
 </div>
 
-<!-- TOP BAR -->
 <header class="topbar">
     <p class="title" id="home-trigger" role="button" tabindex="0">Memoir</p>
 
-    <!-- DESKTOP ONLY -->
     <nav class="topbar-nav">
         <a class="nav-link caps" href="#page-three" id="about-trigger">about</a>
     </nav>
 
-    <!-- MOBILE ONLY: "from, username" (if signed in) sits next to the three-line menu button -->
     <div class="topbar-mobile-controls">
         <button type="button" class="menu-trigger" id="menu-trigger" aria-label="Menu" aria-haspopup="true" aria-expanded="false" aria-controls="mobile-menu">
             <span></span><span></span><span></span>
@@ -148,7 +145,7 @@
                 become. Or from yourself — a letter from a day you've long forgotten,
                 arriving when you finally need it.
             </p>
-            <!-- <p class="page-three-signoff reveal"><em>— written slowly, for later</em></p> -->
+            
         </div>
 
     </div>

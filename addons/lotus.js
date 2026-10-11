@@ -26,7 +26,7 @@
         }, userCfg);
 
         const css = getComputedStyle(document.documentElement);
-        const accentHex = css.getPropertyValue("--color-accent").trim() || "#d0afc0";
+        const accentHex = css.getPropertyValue("--color-accent-fill").trim() || "#d0afc0";
         const ACCENT = (() => {
             const m = /^#?([0-9a-f]{6})$/i.exec(accentHex);
             if (!m) return [208, 175, 192];

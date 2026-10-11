@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#d0afc0">
+        <script>try{if(localStorage.getItem("loucyl-theme")==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}</script>
 
         <title>Loucyl Liao</title>
         <meta name="description" content="meet the girl behind, see what's in the making, wander through more stuffs i've picked up along the way. if you find something worth talking about, say hello.">
@@ -35,6 +36,7 @@
 
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="mobile.css">
+        <link rel="stylesheet" href="light-theme.css">
 
         <script type="application/ld+json">
         {
@@ -58,6 +60,18 @@
         </script>
     </head>
     <body>
+        <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+            <filter id="ink-3a2a33" color-interpolation-filters="sRGB">
+                <feColorMatrix type="matrix" values="0 0 0 0 0.2275  0 0 0 0 0.1647  0 0 0 0 0.2  -0.2126 -0.7152 -0.0722 0 1" result="ink"/>
+                <feComposite in="ink" in2="SourceAlpha" operator="in"/>
+            </filter>
+            <filter id="ink-3a2a33-alpha" color-interpolation-filters="sRGB">
+                <feColorMatrix type="matrix" values="0 0 0 0 0.2275  0 0 0 0 0.1647  0 0 0 0 0.2  0 0 0 1 0"/>
+            </filter>
+            <filter id="ink-52444c-alpha" color-interpolation-filters="sRGB">
+                <feColorMatrix type="matrix" values="0 0 0 0 0.3216  0 0 0 0 0.2667  0 0 0 0 0.298  0 0 0 1 0"/>
+            </filter>
+        </svg>
         <div class="page-progress" aria-hidden="true"><span id="page-progress-bar"></span></div>
         <header class="mobile-header">
             <div class="mobile-progress" aria-hidden="true"><span id="mobile-progress-bar"></span></div>
@@ -167,6 +181,10 @@
                     <p class="sidebar-label">based</p>
                     <p class="sidebar-locale">EN · Baguio,<br>Philippines</p>
                     <p class="sidebar-clock" id="sidebar-clock">--:--:-- --</p>
+                    <button class="theme-toggle" id="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Light mode">
+                        <span class="theme-toggle__track" aria-hidden="true"><span class="theme-toggle__thumb"></span></span>
+                        <span class="theme-toggle__label">dark</span>
+                    </button>
                 </div>
 
             </div>
@@ -186,7 +204,6 @@
             </div>
         <div class="content-wrapper">
 
-            <!-- Hero Section -->
             <section id="intro" class="hero">
                 <p class="section-title">00 PROLOGUE</p>
                 <h1 class="logo-heading">
@@ -217,12 +234,12 @@
                 </p>
             </section>
 
-            <!-- About Section -->
             <section id="about" class="about">
                 <h2 class="section-title">01 PORTRAIT</h2>
 
                 <div class="portrait-wrap">
-                    <img class="about-portrait" src="attachments/portrait.png" alt="loucyl" loading="eager" fetchpriority="high">
+                    <img class="about-portrait about-portrait--dark" src="attachments/portrait.png" alt="loucyl" loading="eager" fetchpriority="high">
+                    <img class="about-portrait about-portrait--light" src="attachments/portrait-light.png" alt="loucyl" loading="lazy">
                     <pre id="butterfly-animation" class="ascii-butterfly"></pre>
 
                     <button class="her-button" type="button" data-project="biography" aria-label="Read her biography">
@@ -264,7 +281,6 @@
                 </div>
             </section>
 
-            <!-- Experience / Projects Section -->
             <section id="projects" class="projects">
                 <h2 class="section-title">02 WORKS</h2>
 
@@ -365,7 +381,6 @@
                     </div>
                 </div>
 
-                <!-- TERMINAL -->
                 <h2 class="terminal-subtitle">terminal /<span class="accent">cli</span></h2>
                 <div class="terminal-demo" id="terminal-demo">
 
@@ -423,7 +438,6 @@
 
             </section>
 
-            <!-- More Stuffs Section -->
             <section id="more_stuffs" class="more_stuffs">
                 <h2 class="section-title">03 COMPENDIUM</h2>
 
@@ -584,7 +598,6 @@
             </div>
         </footer>
 
-        <!-- TERMINAL MODAL -->
         <div class="terminal-modal" id="terminal-modal" hidden>
             <div class="terminal-modal-backdrop" data-terminal-close></div>
 
@@ -612,7 +625,6 @@
             </div>
         </div>
 
-        <!-- PROJECT DETAIL SHEET -->
         <div class="project-sheet" id="project-sheet" hidden data-lenis-prevent>
             <div class="project-sheet-scrim" data-project-close></div>
 
@@ -664,7 +676,6 @@
                         </figure>
                     </div>
 
-                    <!-- ============ SYZYGIA ============ -->
                     <section class="project-section" data-section="syzygia" data-crumb="Syzygia" hidden data-lenis-prevent>
                         <p class="project-sheet-meta">iOS App · AI · Astrology, Tarot &amp; Destiny Matrix</p>
                         <h2 class="project-sheet-title"><span class="accent">Syzygia</span> — the intersection of spirit, 
@@ -700,7 +711,6 @@
                         </div>
                     </section>
 
-                    <!-- ============ MEMOIR ============ -->
                     <section class="project-section" data-section="memoir" data-crumb="Memoir" hidden data-lenis-prevent>
                         <p class="project-sheet-meta">Web · Digital Letters</p>
                         <h2 class="project-sheet-title"><span class="accent">Memoir</span> — digital writing web app for letters that are meant to be found later.</h2>
@@ -773,7 +783,7 @@
                         </div>
                     </section>
 
-                    <!-- ============ ALGEBRAWL ============ -->
+                    
                     <section class="project-section" data-section="algebrawl" data-crumb="Algebrawl" hidden data-lenis-prevent>
                         <p class="project-sheet-meta">App · Mathematics</p>
                         <h2 class="project-sheet-title"><span class="accent">Algebrawl</span> — an arcade-style, turn-based educational math battle game.</h2>
@@ -865,7 +875,7 @@
                         </div>
                     </section>
 
-                    <!-- ============ BIOGRAPHY ============ -->
+                    
                     <section class="project-section" data-section="biography" data-crumb="bloom-bruised" data-sheet-fullscreen="true" hidden data-lenis-prevent>
                         <p class="project-sheet-meta">Biography · Longform</p>
                         <figure class="project-sheet-hero">
@@ -1086,13 +1096,15 @@
         <script type="importmap">
         {
             "imports": {
-                "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+                "three": "https:
                 "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
             }
         }
         </script>
+        <script src="addons/theme.js"></script>
         <script src="script.js"></script>
         <script src="addons/mesh-bg.js"></script>
+        <script src="addons/petal-fall.js"></script>
         <script type="module" src="addons/terminal.js?v=2"></script>
         <script src="addons/butterfly-curve.js"></script>
         <script src="addons/cursor.js" defer></script>

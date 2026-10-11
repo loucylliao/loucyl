@@ -1,6 +1,4 @@
-/* =========================================
-   ASCII ANIMATION LOADER
-   ========================================= */
+
 function loadAsciiAnimation(jsonPath, elementId, frameDuration) {
     fetch(jsonPath)
         .then(response => response.json())
@@ -35,9 +33,7 @@ if (artScene && "IntersectionObserver" in window) {
     }, { threshold: 0.6 }).observe(artScene);
 }
 
-/* =========================================
-   BOOKSHELF
-   ========================================= */
+
 (function () {
     const shelf = document.querySelector('.shelf');
     if (!shelf) return;
@@ -59,9 +55,7 @@ if (artScene && "IntersectionObserver" in window) {
     });
 })();
 
-/* =========================================
-   FOOTER — LIVE CLOCK
-   ========================================= */
+
 (function () {
     const el = document.getElementById('footer-clock');
     if (!el) return;
@@ -82,9 +76,7 @@ if (artScene && "IntersectionObserver" in window) {
     setInterval(tick, 15000);
 })();
 
-/* =========================================
-   SIDEBAR — LIVE CLOCK
-   ========================================= */
+
 (function () {
     const el = document.getElementById('sidebar-clock');
     if (!el) return;
@@ -105,9 +97,7 @@ if (artScene && "IntersectionObserver" in window) {
 })();
 
 
-/* =========================================
-   SIDEBAR — ACTIVE SECTION
-   ========================================= */
+
 (function () {
     const navItems = document.querySelectorAll('.sidebar .nav-item[data-section]');
     if (!navItems.length) return;
@@ -129,10 +119,11 @@ if (artScene && "IntersectionObserver" in window) {
             peakAlpha: 0.5,
             coreSize: [1, 2.4],
             glow: 6,
-            coreColor: '#f6e6ee'
+            coreColor: '#f6e6ee',
+            coreColorLight: '#b47f9a'
         };
         const accent = getComputedStyle(document.documentElement)
-            .getPropertyValue('--color-accent').trim() || '#d0afc0';
+            .getPropertyValue('--color-accent-fill').trim() || '#d0afc0';
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         if (!ctx) return () => {};
@@ -185,7 +176,7 @@ if (artScene && "IntersectionObserver" in window) {
                 );
                 ctx.save();
                 ctx.globalAlpha = fade * twinkle * config.peakAlpha;
-                ctx.fillStyle = config.coreColor;
+                ctx.fillStyle = document.documentElement.getAttribute('data-theme') === 'light' ? config.coreColorLight : config.coreColor;
                 ctx.shadowColor = accent;
                 ctx.shadowBlur = config.glow;
                 ctx.beginPath();
@@ -319,9 +310,7 @@ if (artScene && "IntersectionObserver" in window) {
     currentId = 'intro';
 })();
 
-/* =========================================
-   POPUP SHEET
-   ========================================= */
+
 (function () {
     const sheet     = document.getElementById('project-sheet');
     const crumb     = document.getElementById('project-sheet-crumb');
@@ -364,7 +353,7 @@ if (artScene && "IntersectionObserver" in window) {
         if (sheetBar) sheetBar.style.transform = 'scaleX(0)';
     }
 
-    /* biography section indicator */
+    
     let bioProgress = null;
 
     function buildBioProgress() {
@@ -475,7 +464,7 @@ if (artScene && "IntersectionObserver" in window) {
         });
     }
 
-    /* full screen mode */
+    
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     let fsTimer  = null;
     let fsCancel = null;
@@ -755,9 +744,7 @@ if (artScene && "IntersectionObserver" in window) {
     });
 })();
 
-/* =========================================
-   FLOATING CURSOR
-   ========================================= */
+
 (function () {
     const terminal = document.querySelector('.terminal--preview');
     if (!terminal) return;
@@ -891,9 +878,7 @@ if (artScene && "IntersectionObserver" in window) {
     }
 })();
 
-/* =========================================
-   MOBILE TOPBAR
-   ========================================= */
+
 (function () {
     const btn     = document.getElementById('mobile-menu-btn');
     const sidebar = document.getElementById('sidebar');
@@ -963,9 +948,7 @@ if (artScene && "IntersectionObserver" in window) {
     }
 })();
 
-/* =========================================
-   SMOOTH SCROLL
-   ========================================= */
+
 const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -987,9 +970,7 @@ if (typeof gsap !== 'undefined') {
     gsap.ticker.lagSmoothing(0);
 }
 
-/* =========================================
-   NAV SPOTLIGHT
-   ========================================= */
+
 (function () {
     const main = document.querySelector('.main-content');
     const subItems = document.querySelectorAll('.sidebar .sub-nav > li[data-spot]');
@@ -1131,9 +1112,7 @@ if (typeof gsap !== 'undefined') {
 })();
 
 
-/* =========================================
-   SHELF SPOTLIGHT
-   ========================================= */
+
 (function () {
     const light = document.querySelector('.shelf-spotlight');
     if (!light) return;
